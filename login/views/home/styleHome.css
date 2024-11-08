@@ -1,0 +1,22 @@
+/* Ajustes para achicar el carrusel */
+.carousel-inner {
+    max-width: 80%; /* Limita el ancho máximo del carrusel */
+    margin: 0 auto; /* Centra el carrusel horizontalmente */
+}
+
+.carousel-item img {
+    width: 100%; /* Hace que las imágenes ocupen todo el ancho del contenedor, manteniendo el tamaño */
+    height: 450px; /* Ajusta la altura de las imágenes */
+    object-fit: cover; /* Asegura que las imágenes no se deformen */
+}
+
+/* Ajuste de los controles prev/next para el carrusel */
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para los controles */
+}
+
+/* Ajuste de la velocidad de transición del carrusel */
+.carousel-item {
+    transition: transform 0.3s ease-in-out; /* 0.3s es el tiempo de transición, puedes cambiarlo para que sea más rápido */
+}
