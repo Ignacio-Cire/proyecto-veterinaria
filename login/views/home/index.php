@@ -14,8 +14,7 @@ include_once '../estructura/nav.php';
 </head>
 <body><br><br>
 
-<nav>
-</nav>
+<nav></nav>
 
 <!-- Carrusel de imágenes -->
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -45,10 +44,12 @@ include_once '../estructura/nav.php';
     </a>
 </div>
 
-<br><br>
+
+
 <br><br>
 <?php
 include_once '../estructura/footer.php';
 ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

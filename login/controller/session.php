@@ -19,7 +19,7 @@ class Session {
         // Asumimos que hay una clase Usuario en el ORM que maneja la validación de usuarios
 
         //aca deberia llamar a ABMusuario...
-        $usuario = new Usuario();
+        $usuario = new ABMUsuario();
         $usuarioEncontrado = $usuario->obtenerPorEmail($email);
 
         if ($usuarioEncontrado) {
@@ -85,3 +85,5 @@ class Session {
         }
     }
 }
+
+

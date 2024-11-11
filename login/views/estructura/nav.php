@@ -56,7 +56,7 @@
     <!-- Menú de navegación -->
     <div class="nav-links">
         <ul>
-            <li><a href="#">Tienda</a></li>
+            <li><a href="../tienda.php">Tienda</a></li>
             <li><a href="#">Ofertas</a></li>
             <li class="dropdown">
                 <a href="#">Categorías</a>

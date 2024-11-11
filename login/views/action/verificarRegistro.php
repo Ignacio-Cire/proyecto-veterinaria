@@ -16,7 +16,7 @@ if ($datos) {
     // Extrae los datos del formulario
     $username = $datos['nombreUsuario'];
     $email = $datos['email'];
-    $password = $datos['password'];
+    $password = $datos['password'];  // Esta es la contraseña hasheada con SHA-256 desde el cliente
     $captcha = $datos['g-recaptcha-response'];
 
     // Verifica si el CAPTCHA está presente
@@ -34,8 +34,11 @@ if ($datos) {
     // Crear una instancia de la base de datos
     $baseDatos = new BaseDatos();
 
-    // Crear una instancia de Usuario
-    $usuario = new Usuario($username, $email, password_hash($password, PASSWORD_BCRYPT)); // usar hash para la contraseña
+    // Ahora aplica un nuevo hash (Bcrypt) a la contraseña hasheada
+    $passwordHashed = password_hash($password, PASSWORD_BCRYPT);  // Hashea nuevamente con Bcrypt
+
+    // Crear una instancia de Usuario con el nuevo hash
+    $usuario = new Usuario($username, $email, $passwordHashed); // Usar el hash Bcrypt para almacenarlo
 
     if ($baseDatos->Iniciar()) {
         // Llama a tu método para insertar el usuario
@@ -54,3 +57,4 @@ if ($datos) {
 
     exit();
 }
+
