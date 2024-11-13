@@ -1,5 +1,7 @@
 <?php
 
+include_once '../../models/UsuarioRol.php'; // Asegúrate de que esta ruta sea correcta
+
 
 class ABMUsuarioRol
 {
