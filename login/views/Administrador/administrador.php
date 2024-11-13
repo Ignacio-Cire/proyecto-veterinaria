@@ -8,10 +8,10 @@
 
 // Usa el método validar para comprobar si el usuario ha iniciado sesión
 //if (!$objSession->validar()) {
-    // Si no está autenticado, redirige al login
-  //  echo "No se pudo iniciar sesión";
-    // header('Location: ../view/login.php');
-    //exit();
+// Si no está autenticado, redirige al login
+//  echo "No se pudo iniciar sesión";
+// header('Location: ../view/login.php');
+//exit();
 //}
 
 ?>
@@ -35,9 +35,9 @@ include_once '../estructura/nav.php';
         <br>
         <h1>Bienvenido/a !!</h1>
 
-        
+
         <p> <?php //echo htmlspecialchars($session->getUsuario()); ?>. Has iniciado sesión exitosamente.</p>
-        
+
 
 
         <div class="dashboard-container">

@@ -66,6 +66,7 @@
                 </ul>
             </li>
             <li><a href="#">Contacto</a></li>
+            <li><a href="#">Turnos</a></li>
         </ul>
     </div>
 </div>

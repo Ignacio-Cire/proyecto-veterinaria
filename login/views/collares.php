@@ -19,8 +19,8 @@ include_once '../views/estructura/nav.php';
 <div class="container mt-5">
     <h2>Collares</h2>
     <div class="row">
-        <!-- Producto 1 -->
-         <form>
+        <!-- Producto 1 agregar metodos post -->
+         <form >
         <div class="col-md-4 mb-4">
             <div class="card">
                 <img src="../../img5.webp" class="card-img-top" alt="Collar 1">

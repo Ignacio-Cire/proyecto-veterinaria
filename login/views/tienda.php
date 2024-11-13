@@ -23,9 +23,9 @@ include_once 'estructura/nav.php';
                     <table class="table text-center">
                         <tbody>
                             <tr>
-                                <td><a href="accesorio.php?producto=auriculares"><img src="../../../img1.jpg" class="img-fluid" alt="Auriculares" style="width: 200px;"></a></td>
-                                <td><a href="accesorio.php?producto=auriculares">collares</a></td>
-                                <td><a href="accesorio.php?producto=teclados"><img src="../../../img1.jpg" class="img-fluid" alt="Teclados" style="width: 200px;"></a></td>
+                                <td><a href="#"><img src="../../../img1.jpg" class="img-fluid" alt="Auriculares" style="width: 200px;"></a></td>
+                                <td><a href="#">collares</a></td>
+                                <td><a href="#"><img src="../../../img1.jpg" class="img-fluid" alt="Teclados" style="width: 200px;"></a></td>
                                 <td><a href="accesorio.php?producto=teclados">bozal</a></td>
                             </tr>
                             <tr>
