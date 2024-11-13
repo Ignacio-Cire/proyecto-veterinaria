@@ -3,6 +3,8 @@ session_start();
 include_once 'C:\xampp\htdocs\login-security\login\views\utils\funciones.php'; 
 include_once '../../models/conector/BaseDatos.php';
 include_once '../../models/Usuario.php';
+include_once '../../models/ABMUsuario.php';
+
 
 // Obtiene los datos enviados
 $datos = datasubmitted();
@@ -16,7 +18,7 @@ if ($datos) {
     // Extrae los datos del formulario
     $username = $datos['nombreUsuario'];
     $email = $datos['email'];
-    $password = $datos['password'];  // Esta es la contraseña hasheada con SHA-256 desde el cliente
+    $password = $datos['password'];
     $captcha = $datos['g-recaptcha-response'];
 
     // Verifica si el CAPTCHA está presente
@@ -33,20 +35,23 @@ if ($datos) {
 
     // Crear una instancia de la base de datos
     $baseDatos = new BaseDatos();
+   
 
-    // Ahora aplica un nuevo hash (Bcrypt) a la contraseña hasheada
-    $passwordHashed = password_hash($password, PASSWORD_BCRYPT);  // Hashea nuevamente con Bcrypt
+    // Crear una instancia de Usuario
+    $usuario = new Usuario($username, $email, password_hash($password, PASSWORD_BCRYPT)); // usar hash para la contraseña
 
-    // Crear una instancia de Usuario con el nuevo hash
-    $usuario = new Usuario($username, $email, $passwordHashed); // Usar el hash Bcrypt para almacenarlo
+    $objAbmUsRol = new ABMUsuarioRol();
+
+    $idCliente = 3;
 
     if ($baseDatos->Iniciar()) {
         // Llama a tu método para insertar el usuario
         if ($usuario->insertar($baseDatos)) { // Asegúrate de tener un método insertar en tu clase Usuario
+
             // Mensaje de éxito guardado en la sesión
             $_SESSION['mensaje'] = 'Registro exitoso. Puedes iniciar sesión ahora.';
             // Redirige a login.php después de un registro exitoso
-            header('Location: ../login.php');
+            header('Location: ../Login/login.php');
             exit();
         } else {
             echo 'Error al registrar el usuario. Intenta de nuevo.'; // Mensaje de error
@@ -57,4 +62,3 @@ if ($datos) {
 
     exit();
 }
-

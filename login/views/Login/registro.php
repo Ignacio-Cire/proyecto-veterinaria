@@ -16,7 +16,7 @@ include_once '../estructura/nav.php';
         <div class="card shadow-sm" style="width: 400px;">
             <div class="card-body">
                 <h3 class="text-center mb-4">Registro</h3>
-                <form id="miFormulario" action="./action/verificarRegistro.php"  method="POST">
+                <form id="miFormulario" action="../action/verificarRegistro.php"  method="POST">
                     <!-- Campo de Nombre de Usuario -->
                     <div class="form-group">
                         <label for="nombreUsuario"></label>
@@ -54,6 +54,6 @@ include_once '../estructura/footer.php';
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../utils/hashPassword.js"></script> 
+    <!-- <script src="../utils/hashPassword.js"></script>  -->
 </body>
 </html>

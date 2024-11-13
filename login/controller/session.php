@@ -39,7 +39,7 @@ class Session {
      * @return bool
      */
     public function validar() {
-        return isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario']);
+        return isset($_SESSION['idusuario']) && isset($_SESSION['nombreUsuario']);
     }
 
     /**

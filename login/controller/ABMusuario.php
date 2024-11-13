@@ -1,5 +1,5 @@
 <?php
-
+include_once '..\models\Usuario.php';
 
 class ABMUsuario {
     // Método principal para manejar altas, bajas y modificaciones

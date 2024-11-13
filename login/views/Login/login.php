@@ -15,7 +15,7 @@ include_once '../estructura/nav.php';
         <div class="card shadow-sm" style="width: 400px;">
             <div class="card-body">
                 <h3 class="text-center mb-4">Iniciar Sesión</h3>
-                <form action="./action/verificarLogin.php" method="POST"> <!-- Asegúrate de que la ruta sea correcta -->
+                <form action="../action/verificarLogin.php" method="POST"> <!-- Asegúrate de que la ruta sea correcta -->
                     <!-- Campo de Email -->
                     <div class="form-group">
                         <label for="email"></label>

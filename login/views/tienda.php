@@ -24,15 +24,29 @@ include_once 'estructura/nav.php';
                         <tbody>
                             <tr>
                                 <td><a href="#"><img src="../../../img1.jpg" class="img-fluid" alt="Auriculares" style="width: 200px;"></a></td>
-                                <td><a href="#">collares</a></td>
-                                <td><a href="#"><img src="../../../img1.jpg" class="img-fluid" alt="Teclados" style="width: 200px;"></a></td>
+
+
+                                <td><a href="../view        s/collares.php">collares</a></td>
+
+
+                                <td><a href="http://localhost:3000/login/views/collares.php"><img src="../views/" class="img-fluid" alt="Teclados" style="width: 200px;"></a></td>
+
+
                                 <td><a href="accesorio.php?producto=teclados">bozal</a></td>
                             </tr>
                             <tr>
                                 <td><a href="accesorio.php?producto=ratones"><img src="../../../img1.jpg" class="img-fluid" alt="Ratones" style="width: 200px;"></a></td>
+
+
                                 <td><a href="accesorio.php?producto=ratones">corrreas</a></td>
+
+
                                 <td><a href="accesorio.php?producto=sillas"><img src="../../../img1.jpg" class="img-fluid" alt="Sillas" style="width: 200px;"></a></td>
+
+
                                 <td><a href="accesorio.php?producto=sillas">cono</a></td>
+
+
                             </tr>
                         </tbody>
                     </table>
@@ -48,15 +62,27 @@ include_once 'estructura/nav.php';
                     <table class="table text-center">
                         <tbody>
                             <tr>
-                                <td><a href="alimento.php?producto=snacks"><img src="../../../imagen2.jpg" class="img-fluid" alt="Snacks" style="width: 150px;"></a></td>
+                                <td><a href=""><img src="../../../imagen2.jpg" class="img-fluid" alt="Snacks" style="width: 150px;"></a></td>
+
+
                                 <td><a href="alimento.php?producto=snacks">Snacks</a></td>
+
+
                                 <td><a href="alimento.php?producto=bebidas"><img src="../../../imagen2.jpg" class="img-fluid" alt="Bebidas" style="width: 150px;"></a></td>
+
+
                                 <td><a href="alimento.php?producto=bebidas">Bebidas</a></td>
                             </tr>
                             <tr>
-                                <td><a href="alimento.php?producto=frutas"><img src="../../../imagen2.jpg" class="img-fluid" alt="Frutas" style="width: 150px;"></a></td>
-                                <td><a href="alimento.php?producto=frutas">Frutas</a></td>
+                                <td><a href="alimento.php?producto=frutas"><img src="../../../imagen2.jpg" class="img-fluid" alt="Gato Purina One" style="width: 150px;"></a></td>
+
+
+                                <td><a href="alimento.php?producto=frutas">Gato Purina One</a></td>
+
+
                                 <td><a href="alimento.php?producto=verduras"><img src="../../../imagen2.jpg" class="img-fluid" alt="Verduras" style="width: 150px;"></a></td>
+
+
                                 <td><a href="alimento.php?producto=verduras">Verduras</a></td>
                             </tr>
                         </tbody>
@@ -74,15 +100,31 @@ include_once 'estructura/nav.php';
                         <tbody>
                             <tr>
                                 <td><a href="medicamento.php?producto=analgesicos"><img src="../../../img3.jpg" class="img-fluid" alt="Analgésicos" style="width: 150px;"></a></td>
+
+
                                 <td><a href="medicamento.php?producto=analgesicos">Analgésicos</a></td>
+
+
                                 <td><a href="medicamento.php?producto=antiinflamatorios"><img src="../../../img3.jpg" class="img-fluid" alt="Antiinflamatorios" style="width: 150px;"></a></td>
+
+
                                 <td><a href="medicamento.php?producto=antiinflamatorios">Antiinflamatorios</a></td>
+
+
                             </tr>
                             <tr>
                                 <td><a href="medicamento.php?producto=vitaminas"><img src="../../../img3.jpg" class="img-fluid" alt="Vitaminas" style="width: 150px;"></a></td>
+
+
                                 <td><a href="medicamento.php?producto=vitaminas">Vitaminas</a></td>
+
+
                                 <td><a href="medicamento.php?producto=antibioticos"><img src="../../../img3.jpg" class="img-fluid" alt="Antibióticos" style="width: 150px;"></a></td>
+
+
                                 <td><a href="medicamento.php?producto=antibioticos">Antibióticos</a></td>
+
+
                             </tr>
                         </tbody>
                     </table>
