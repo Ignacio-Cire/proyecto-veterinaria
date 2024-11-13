@@ -1,26 +1,46 @@
+$(document).ready(function () {
+    // Función para agregar al carrito
+    $(".agregarCarrito").on("click", function (event) {
+        event.preventDefault();
 
+        // Obtener los datos del producto desde los atributos
+        const $producto = $(this);
+        const nombre = $producto.data("nombre");
+        const precio = parseFloat($producto.data("precio"));
+        const id = $producto.data("producto");
 
+        // Obtener el carrito actual desde localStorage
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-$(document).ready(function() {
-    // Capturar el clic en el botón "Agregar al carrito"
-    $('.agregarCarrito').click(function() {
-        var producto = $(this).data('producto');  // Obtener el producto desde el atributo data-producto
+        // Crear un objeto para el producto
+        const item = {
+            id: id,
+            nombre: nombre,
+            precio: precio
+        };
 
-        // Realizar la solicitud AJAX
-        $.ajax({    
-            url: 'agregarCarrito.php',  // El archivo PHP que manejará el carrito
-            type: 'GET',  // Usamos GET o POST dependiendo de tu preferencia
-            data: { producto: producto },  // Pasamos el nombre del producto
-            success: function(response) {
-                // Aquí puedes mostrar una notificación o actualizar el carrito visualmente
-                alert('Producto agregado al carrito: ' + producto);
-                // Puedes hacer cualquier otra acción, como actualizar el contador del carrito
-            },
-            error: function(xhr, status, error) {
-                // Manejar el error en caso de que falle la solicitud
-                alert('Hubo un error al agregar el producto al carrito');
-            }
-        });
+        // Agregar el producto al carrito
+        carrito.push(item);
+
+        // Guardar el carrito actualizado en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
+        // Mostrar mensaje de éxito--luego cambiar...
+        alert(`Producto agregado al carrito: ${nombre}`);
+
+        // Actualizar el contador del carrito
+        actualizarContadorCarrito();
     });
-});
 
+    // Función para actualizar el contador del carrito
+    function actualizarContadorCarrito() {
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        const contador = carrito.length;
+
+        // Actualizar el contador en el HTML
+        $("#contadorCarrito").text(contador);
+    }
+
+    // Llama a la función para actualizar el contador al cargar la página
+    actualizarContadorCarrito();
+});

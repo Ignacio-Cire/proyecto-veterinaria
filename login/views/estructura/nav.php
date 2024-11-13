@@ -40,8 +40,9 @@
         <div class="account-cart">
             <a href="http://localhost:3000/login/views/Login/login.php" class="login">Login</a>
             <a href="#" class="cart">
-                <span class="cart-icon">🛒</span> Carrito (0)
-            </a>
+    <span class="cart-icon">🛒</span> Carrito (<span id="contadorCarrito">0</span>)
+</a>
+
             <a class="nav-link" href="https://github.com/Ignacio-Cire/login-security.git" target="_blank">
                 <i class="fab fa-github fa-2x"></i>
             </a>
@@ -79,7 +80,3 @@
 
 </body>
 </html>
-
-
-
-
