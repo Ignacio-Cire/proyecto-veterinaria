@@ -3,8 +3,6 @@ session_start();
 include_once 'C:\xampp\htdocs\login-security\login\views\utils\funciones.php'; 
 include_once '../../models/conector/BaseDatos.php';
 include_once '../../models/Usuario.php';
-include_once '../../models/ABMUsuario.php';
-
 
 // Obtiene los datos enviados
 $datos = datasubmitted();
@@ -35,19 +33,13 @@ if ($datos) {
 
     // Crear una instancia de la base de datos
     $baseDatos = new BaseDatos();
-   
 
     // Crear una instancia de Usuario
     $usuario = new Usuario($username, $email, password_hash($password, PASSWORD_BCRYPT)); // usar hash para la contraseña
 
-    $objAbmUsRol = new ABMUsuarioRol();
-
-    $idCliente = 3;
-
     if ($baseDatos->Iniciar()) {
         // Llama a tu método para insertar el usuario
         if ($usuario->insertar($baseDatos)) { // Asegúrate de tener un método insertar en tu clase Usuario
-
             // Mensaje de éxito guardado en la sesión
             $_SESSION['mensaje'] = 'Registro exitoso. Puedes iniciar sesión ahora.';
             // Redirige a login.php después de un registro exitoso

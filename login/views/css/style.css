@@ -1,108 +1,240 @@
-/* dfsegdfvd */
+/* Estilos generales para la página */
 body {
-    font-family: 'Righteous', cursive !important;
-    color: #ffffff;
-    background: url('./6193485.jpg') no-repeat center center fixed;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 180%;
-    background-size: cover;
-    filter: blur(0px);
-    z-index: -1;
-}
-
-nav {
-    background-color: #000000bd;
-   
-    top: 0;
-
-
-
-}
-
-.navbar-brand,
-.nav-link {
-    color: #00ff00 !important;
-    /* Verde Neón */
-}
-
-.nav-link:hover {
-    color: #000000 !important;
-    background-color: #00ff00;
-    /* Hover con fondo verde neón */
-    border-radius: 5px;
-}
-
-.navbar-brand:hover {
-    color: #00cc00 !important;
-    /* Efecto en la marca */
-}
-
-.dropdown-menu {
-    background-color: #000000;
-    border-color: #00ff00;
-}
-
-.dropdown-item {
-    color: #00ff00 !important;
-}
-
-.dropdown-item:hover {
-    background-color: #00ff00;
-    color: #000000 !important;
+    background-color: #f6efe8; /* Cambia este color al que prefieras */
+    font-family: avant;
+    margin: 0;
+    padding: 0;
 }
 
 
-h2 {
-    color: #00ff00;
+/* Encabezado de las redes sociales (segundo encabezado) */
+.social-header {
+    background-color: #e8cc45;
+    color: #006400;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end; /* Alinea las redes sociales a la derecha */
 }
 
-h1 {
-    color: #00ff00;
+.social-icons a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
 }
 
-h4 {
-    color: #00ff00;
+.social-icons a:hover {
+    color: #a27430
 }
 
-h3 {
-    color: #00ff00;
+/* Encabezado principal */
+header {
+    background-color: #33312A;
+    color: #022402;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-a {
-    font-size: 125%;
+/* Contenedor del logo */
+.logo img {
+    padding-left: 40px;
+    padding-bottom: 10px;
+    max-width: 150px;
+    height: 150px;
 }
 
-/*efecto letras*/
-canvas {
-    pointer-events: none;
+/* Nombre de la tienda pegado al logo */
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 1px; /* Reducido el margen para pegar el nombre al logo */
+    color: #fff;
 }
 
-/*barra scroll*/
-
-::-webkit-scrollbar {
-    width: 12px;
+/* Barra de búsqueda */
+.search-bar input[type="text"] {
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
+    width: 500px; /* Alarga la barra de búsqueda */
 }
 
-/* Estilo para el "thumb" de la barra de desplazamiento */
-::-webkit-scrollbar-thumb {
-    background-color: #00ff00;
-    /* Verde neón */
-    border-radius: 6px;
-    border: 3px solid #000;
-    /* Borde negro para contraste */
+.search-bar button {
+    padding: 5px 10px;
+    background-color: #e8cc45;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    color: #333;
 }
 
-/* Estilo para el "track" de la barra de desplazamiento */
-::-webkit-scrollbar-track {
-    background-color: #111;
-    /* Fondo oscuro para contraste */
+.search-bar button:hover {
+    background-color: #e88c00;
+    color: #fff;
 }
 
-/* Para Firefox (versión 64 y posteriores) */
+/* Contenedor para el login, carrito y GitHub */
+.account-cart {
+    display: flex;
+    align-items: center;
+}
+
+.account-cart a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.account-cart a:hover {
+    color: #a27430
+}
+
+.cart-icon {
+    font-size: 20px;
+}
+
+/* Reset de algunos estilos por defecto */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: #00ff00 #111;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+}
+
+/* Estilos del logo */
+.navbar .logo a {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+
+
+/* Estilos generales para la barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: center; /* Centra el contenido de la barra de navegación */
+    align-items: center;     /* Alinea los elementos verticalmente */
+    background-color: #e8cc45;
+    padding: 10px 20px;
+    width: 100%; /* Asegura que la barra ocupe el 100% del ancho de la página */
+}
+
+/* Menú de navegación */
+.nav-links ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: center; /* Centra los elementos dentro del <ul> */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links ul li {
+    margin: 0 20px;
+    position: relative; /* Necesario para el dropdown */
+}
+
+.nav-links ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.nav-links ul li a:hover {
+    color: #a27430; /* Cambia el color del enlace al pasar el mouse */
+}
+
+/* Estilos para el dropdown */
+.nav-links .dropdown {
+    position: relative; /* Necesario para el dropdown */
+}
+
+.nav-links .dropdown-menu {
+    display: none; /* Ocultamos el submenú por defecto */
+    position: absolute;
+    top: 100%; /* Lo coloca debajo del enlace "Categorías" */
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    list-style-type: none;
+    padding: 10px 0;
+    min-width: 160px; /* Asegura que el submenú tenga un ancho adecuado */
+}
+
+.nav-links .dropdown:hover .dropdown-menu {
+    display: block; /* Muestra el submenú cuando el mouse pasa sobre el contenedor */
+}
+
+.dropdown-menu li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f1f1f1; /* Color de fondo cuando se pasa el mouse sobre las opciones */
+}
+
+
+
+
+
+
+
+/* Estilos para la sección de cuenta */
+.account {
+    display: flex;
+    align-items: center;
+}
+
+.account a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.account a:hover {
+    color: #dc8a10;
+}
+
+
+
+
+
+
+
+/* Responsive: Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .search-bar {
+        margin: 10px 0;
+        width: 100%; /* La barra de búsqueda ocupa todo el ancho en pantallas pequeñas */
+    }
+
+    .account-cart {
+        margin-top: 10px;
+        justify-content: center; /* Centra los elementos en pantallas pequeñas */
+    }
 }
