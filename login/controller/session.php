@@ -24,7 +24,7 @@ class Session {
 
         if ($usuarioEncontrado) {
             // Si el usuario es encontrado, actualizamos las variables de sesión
-            $_SESSION['idUsuario'] = $usuario->getId();
+            $_SESSION['id'] = $usuario->getId();
             $_SESSION['nombreUsuario'] = $usuario->getNombreUsuario();
 
             // $_SESSION['rol'] = $usuario->getRol();  // Asumimos que el usuario tiene un rol
@@ -39,7 +39,7 @@ class Session {
      * @return bool
      */
     public function validar() {
-        return isset($_SESSION['idusuario']) && isset($_SESSION['nombreUsuario']);
+        return isset($_SESSION['id']) && isset($_SESSION['nombreUsuario']);
     }
 
     /**
