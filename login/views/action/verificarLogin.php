@@ -44,8 +44,8 @@ if ($datos) {
 
             if (password_verify($password, $usuarioData['password'])) { // Asegúrate de que el password esté en el array
                 // Guarda la información del usuario en la sesión
-                $_SESSION['id'] = $usuarioData['id'];
                 $_SESSION['usuario'] = $usuarioData['nombreUsuario'];
+                $_SESSION['id'] = $usuarioData['id'];
                 // O cualquier otro campo que quieras guardar
                 echo 'Inicio de sesión exitoso. Bienvenido, ' . $_SESSION['usuario'] . '.';
                 header('Location: ../Login/paginaSegura.php');

@@ -39,9 +39,10 @@ class Session {
      * @return bool
      */
     public function validar() {
-        return isset($_SESSION['id']) && isset($_SESSION['nombreUsuario']);
+        // se revisa si 'id' y 'usuario' existen y no están vacíos
+        return isset($_SESSION['id']) && !empty($_SESSION['id']) && isset($_SESSION['usuario']) && !empty($_SESSION['usuario']);
     }
-
+    
     /**
      * Verifica si la sesión está activa
      * @return bool
@@ -55,12 +56,13 @@ class Session {
      * @return mixed
      */
     public function getUsuario() {
-        if ($this->validar()) {
+        if (isset($_SESSION['nombreUsuario'])) {
             return $_SESSION['nombreUsuario'];
         }
-        return null;
+        return null; // Si no está definido, devuelve null
     }
-
+    
+    
     /**
      * Devuelve el rol del usuario logeado
      * @return mixed
