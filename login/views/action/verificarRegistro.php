@@ -34,23 +34,62 @@ if ($datos) {
     // Crear una instancia de la base de datos
     $baseDatos = new BaseDatos();
 
-    // Crear una instancia de Usuario
-    $usuario = new Usuario($username, $email, password_hash($password, PASSWORD_BCRYPT)); // usar hash para la contraseña
+    try {
+        // Inicia la transacción
+        $baseDatos->beginTransaction();
 
-    if ($baseDatos->Iniciar()) {
-        // Llama a tu método para insertar el usuario
-        if ($usuario->insertar($baseDatos)) { // Asegúrate de tener un método insertar en tu clase Usuario
-            // Mensaje de éxito guardado en la sesión
-            $_SESSION['mensaje'] = 'Registro exitoso. Puedes iniciar sesión ahora.';
-            // Redirige a login.php después de un registro exitoso
-            header('Location: ../Login/login.php');
-            exit();
+        // Crear una instancia de Usuario
+        $usuario = new Usuario($username, $email, password_hash($password, PASSWORD_BCRYPT)); // Usar hash para la contraseña
+
+        if ($baseDatos->Iniciar()) {
+            // Llama a tu método para insertar el usuario
+            if ($usuario->insertar($baseDatos)) { // Asegúrate de tener un método insertar en tu clase Usuario
+                // Obtener el ID del usuario recién insertado
+                $idUsuario = $baseDatos->lastInsertId();
+
+                // Verifica que el ID del usuario se haya obtenido correctamente
+                if (!$idUsuario) {
+                    throw new Exception('No se pudo obtener el ID del usuario insertado.');
+                }
+
+                // Imprime el ID para depuración
+                echo "ID del usuario insertado: $idUsuario<br>";
+
+                // Insertar el rol (cliente = 3)
+                $queryRol = "INSERT INTO usuariorol (idusuario, idrol) VALUES (?, ?)";
+                $stmtRol = $baseDatos->prepare($queryRol);
+                $stmtRol->bindValue(1, $idUsuario); // ID del usuario insertado
+                $stmtRol->bindValue(2, 3);           // Rol cliente (idRol = 3)
+
+                if ($stmtRol->execute()) {
+                    // Si todo va bien, confirmamos la transacción
+                    $baseDatos->commit();
+
+                    // Mensaje de éxito guardado en la sesión
+                    $_SESSION['mensaje'] = 'Registro exitoso. Puedes iniciar sesión ahora.';
+                    // Redirige a login.php después de un registro exitoso
+                    header('Location: ../Login/login.php');
+                    exit();
+                } else {
+                    // Si falla la inserción del rol, revertir la transacción
+                    $baseDatos->rollBack();
+                    echo 'Error al asignar el rol al usuario. Intenta de nuevo.';
+                }
+            } else {
+                // Si falla la inserción del usuario, revertir la transacción
+                $baseDatos->rollBack();
+                echo 'Error al registrar el usuario. Intenta de nuevo.';
+            }
         } else {
-            echo 'Error al registrar el usuario. Intenta de nuevo.'; // Mensaje de error
+            echo 'Error en la conexión a la base de datos.'; // Mensaje de error
         }
-    } else {
-        echo 'Error en la conexión a la base de datos.'; // Mensaje de error
+
+    } catch (Exception $e) {
+        // Si ocurre una excepción, revertir la transacción
+        $baseDatos->rollBack();
+        echo 'Ocurrió un error inesperado: ' . $e->getMessage();
     }
 
     exit();
 }
+?>

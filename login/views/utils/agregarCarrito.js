@@ -1,3 +1,6 @@
+
+
+
 $(document).ready(function () {
     // Función para agregar al carrito
     $(".agregarCarrito").on("click", function (event) {

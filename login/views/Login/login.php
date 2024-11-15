@@ -15,23 +15,23 @@ include_once '../estructura/nav.php';
         <div class="card shadow-sm" style="width: 400px;">
             <div class="card-body">
                 <h3 class="text-center mb-4">Iniciar Sesión</h3>
-                <form action="../action/verificarLogin.php" method="POST"> <!-- Asegúrate de que la ruta sea correcta -->
+                <form id="loginForm">
                     <!-- Campo de Email -->
                     <div class="form-group">
                         <label for="email"></label>
-                        <input type="email" class="form-control" name="email" placeholder="Ingrese el email" required>
+                        <input type="email" id="email" class="form-control" placeholder="Ingrese el email" required>
                     </div>
                     <!-- Campo de Clave -->
                     <div class="form-group">
                         <label for="password"></label>
-                        <input type="password" class="form-control" name="password" placeholder="Ingrese la clave" required>
+                        <input type="password" id="password" class="form-control" placeholder="Ingrese la clave" required>
                     </div>
                     <!-- reCAPTCHA -->
                     <div class="form-group text-center">
                         <div class="g-recaptcha" data-sitekey="6LfhnVkqAAAAAG7ueEm-vYRbLO1u2xLsECX_IOIF"></div>
                     </div>
                     <!-- Botón de Iniciar Sesión -->
-                    <button type="submit" class="btn btn-primary btn-block mt-4">Iniciar Sesión</button>
+                    <button type="button" id="loginButton" class="btn btn-primary btn-block mt-4">Iniciar Sesión</button>
                     <!-- Enlace a Registro -->
                     <p class="text-center mt-3">
                         ¿No tienes cuenta? <a href="registro.php">Regístrate</a>
@@ -41,12 +41,13 @@ include_once '../estructura/nav.php';
         </div>
     </div>
 
-    <?php
-include_once '../estructura/footer.php';
-?>
+    <?php include_once '../estructura/footer.php'; ?>
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../utils/agregarCarrito.js"></script>
+    <script src="../utils/carrito.js"></script>
+    <script src="../utils/login-ajax.js"></script> <!-- Archivo JS para manejar el clic -->
 </body>
 </html>

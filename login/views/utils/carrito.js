@@ -1,3 +1,5 @@
+
+
 // Función para cargar los productos del carrito
 function cargarCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
