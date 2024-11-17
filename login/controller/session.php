@@ -15,23 +15,22 @@ class Session {
      * @param $psw
      * @return bool
      */
-    public function iniciar($email) {
-        // Asumimos que hay una clase Usuario en el ORM que maneja la validación de usuarios
+    public function iniciar($nombreUsuario,$psw){
+        $resp = false;
+        $obj = new ABMUsuario();
+        $param['nombreUsuario']=$nombreUsuario;
+        $param['password']=$psw;
+        $param['usdeshabilitado']='null';
 
-        //aca deberia llamar a ABMusuario...
-        $usuario = new ABMUsuario();
-        $usuarioEncontrado = $usuario->obtenerPorEmail($email);
-
-        if ($usuarioEncontrado) {
-            // Si el usuario es encontrado, actualizamos las variables de sesión
-            $_SESSION['id'] = $usuario->getId();
-            $_SESSION['nombreUsuario'] = $usuario->getNombreUsuario();
-
-            // $_SESSION['rol'] = $usuario->getRol();  // Asumimos que el usuario tiene un rol
-            return true;
+        $resultado = $obj->buscar($param);
+        if(count($resultado) > 0){
+            $usuario = $resultado[0];
+            $_SESSION['id']=$usuario->getidusuario();
+            $resp = true;
         } else {
-            return false;
+            $this->cerrar();
         }
+        return $resp;
     }
 
     /**
@@ -40,7 +39,7 @@ class Session {
      */
     public function validar() {
         // se revisa si 'id' y 'usuario' existen y no están vacíos
-        return isset($_SESSION['id']) && !empty($_SESSION['id']) && isset($_SESSION['usuario']) && !empty($_SESSION['usuario']);
+        return isset($_SESSION['id']) && !empty($_SESSION['id']) && isset($_SESSION['nombreUsuario']) && !empty($_SESSION['nombreUsuario']);
     }
     
     /**
@@ -86,6 +85,8 @@ class Session {
             session_destroy();
         }
     }
+
+    
 }
 
 

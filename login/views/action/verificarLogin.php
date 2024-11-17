@@ -1,63 +1,39 @@
 <?php
 session_start();
-include_once 'C:\xampp\htdocs\login-security\login\views\utils\funciones.php';
-include_once '../../models/conector/BaseDatos.php';
+include_once '../utils/funciones.php';
 include_once '../../controller/ABMusuario.php';
+include_once '../../controller/ABMUsuarioRol.php';
+include_once '../../controller/session.php';
+
+$objSesion = new Session();
 
 // Obtiene los datos enviados
 $datos = datasubmitted();
 
-if (!$datos) {
-    echo 'No se recibieron datos. Por favor, intenta nuevamente.';
-    exit;
-}
 
-if ($datos) {
-    // Extrae los datos del formulario
-    $email = $datos['email'];
-    $password = $datos['password'];
-    $captcha = $datos['g-recaptcha-response'];
+// Crear una instancia de Usuario
 
-    // Verifica si el CAPTCHA está presente
-    if (!$captcha) {
-        echo 'Por favor, verifica el CAPTCHA.';
-        exit;
-    }
+$usuario = new ABMusuario();
+$usuarioRol = new ABMUsuarioRol();
 
-    // Valida el CAPTCHA
-    if (!validarCaptcha($captcha)) {
-        echo 'Verificación CAPTCHA fallida. Inténtalo de nuevo.';
-        exit;
-    }
+// Llama a tu método para obtener el usuario por email
+$usuarioData = $usuario->buscar($datos); //
 
-    // Crear una instancia de la base de datos
-    $baseDatos = new BaseDatos();
+if ($usuarioData) {
+    if (password_verify($password, $usuarioData['password'])) { // Verifica la contraseña
 
-    // Crear una instancia de Usuario
-    $usuario = new ABMusuario();
+        // Guarda la información del usuario en la sesión
+        $rolUs = $usuarioRol->obtenerRol($usuarioData['id']);
+        $objSesion->setUsuario($usuarioData['nombreUsuario']);
+        $objSesion->setIdUsuario($usuarioData['id']);
+        $objSesion->setRol($rolUs);
 
-    if ($baseDatos->Iniciar()) {
-        // Llama a tu método para obtener el usuario por email
-        $usuarioData = $usuario->obtenerPorEmail($baseDatos, $email); //
-
-        if ($usuarioData) {
-
-            if (password_verify($password, $usuarioData['password'])) { // Asegúrate de que el password esté en el array
-                // Guarda la información del usuario en la sesión
-                $_SESSION['usuario'] = $usuarioData['nombreUsuario'];
-                $_SESSION['id'] = $usuarioData['id'];
-                // O cualquier otro campo que quieras guardar
-                echo 'Inicio de sesión exitoso. Bienvenido, ' . $_SESSION['usuario'] . '.';
-                header('Location: ../Login/paginaSegura.php');
-            } else {
-                echo 'La contraseña es incorrecta. Inténtalo de nuevo.';
-            }
-        } else {
-            echo 'No existe un usuario con ese email. Por favor, verifica e intenta nuevamente.';
-        }
+        exit(); // Asegúrate de llamar a exit() después de la redirección
     } else {
-        echo 'Error en la conexión a la base de datos.'; // Mensaje de error
+        echo 'La contraseña es incorrecta. Inténtalo de nuevo.';
     }
-
-    exit();
+} else {
+    echo 'No existe un usuario con ese email. Por favor, verifica e intenta nuevamente.';
 }
+
+exit();

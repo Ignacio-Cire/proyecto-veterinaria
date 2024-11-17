@@ -1,160 +1,232 @@
 <?php
+class ABMUsuario
+{
 
-
-class ABMUsuario {
-    // Método principal para manejar altas, bajas y modificaciones
-    public function abm($datosUsuario) {
-        $resp = false; // Inicializa la respuesta como falsa
-
-        // Verifica si la acción es 'editar', si es así, llama al método `modificacion`
-        if ($datosUsuario['accion'] == 'editar') {
-            if ($this->modificacion($datosUsuario)) {
-                $resp = true; // Cambia la respuesta a verdadera si la modificación es exitosa
+    public function abm($datos)
+    {
+        $resp = false;
+        //print_r($datos);
+        if ($datos['accion'] == 'editar') {
+            if ($this->modificacion($datos)) {
+                $resp = true;
             }
         }
-        
-        // Verifica si la acción es 'borrar', si es así, llama al método `baja`
-        if ($datosUsuario['accion'] == 'borrar') {
-            if ($this->baja($datosUsuario)) {
-                $resp = true; // Cambia la respuesta a verdadera si la baja es exitosa
+        if ($datos['accion'] == 'borrar') {
+            if ($this->baja($datos)) {
+                $resp = true;
             }
         }
-        
-        // Verifica si la acción es 'nuevo', si es así, llama al método `alta`
-        if ($datosUsuario['accion'] == 'nuevo') {
-            if ($this->alta($datosUsuario)) {
-                $resp = true; // Cambia la respuesta a verdadera si la alta es exitosa
+        if ($datos['accion'] == 'nuevo') {
+            if ($this->alta($datos)) {
+                $resp = true;
             }
         }
+        if ($datos['accion'] == 'borrar_rol') {
+            if ($this->borrar_rol($datos)) {
+                $resp = true;
+            }
+        }
+        if ($datos['accion'] == 'nuevo_rol') {
+            if ($this->alta_rol($datos)) {
+                $resp = true;
+            }
 
-        return $resp; // Devuelve el resultado de la operación
+        }
+        return $resp;
+
+    }
+    /**
+     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
+     * @param array $param
+     * @return Tabla
+     */
+    private function cargarObjeto($param)
+    {
+        $obj = null;
+        //SELECT `idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado` FROM `usuario` WHERE 1
+        print_r($param);
+        echo "Cargue el objeto" . array_key_exists('id', $param) . " " . array_key_exists('nombreUsuario', $param) . " " . array_key_exists('password', $param) . " " . array_key_exists('email', $param);
+
+        if (array_key_exists('id', $param) and array_key_exists('nombreUsuario', $param) and array_key_exists('password', $param)
+            and array_key_exists('email', $param)) {
+            echo "Cargue el dsdsdsd";
+            $obj = new Usuario();
+            $obj->setear($param['id'], $param['nombreUsuario'], $param['password'], $param['email'], null);
+            echo "Cargue el objeto";
+        }
+        print_r($obj);
+        return $obj;
     }
 
     /**
-     * Carga un objeto de la clase `Usuario` con los datos recibidos como parámetro
+     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto que son claves
      * @param array $param
-     * @return Usuario|null Devuelve un objeto Usuario o null si no se cumplen las condiciones
+     * @return Tabla
      */
-    private function cargarObjeto($param) {
-        $obj = null; // Inicializa el objeto como null
 
-        // Verifica si existen las claves 'id', 'nombreUsuario', 'email', y 'password' en el array $param
-        if (array_key_exists('id', $param) && array_key_exists('nombreUsuario', $param) &&
-            array_key_exists('email', $param) && array_key_exists('password', $param)) {
-
-            // Crea un nuevo objeto Usuario
-            $obj = new Usuario(); 
-            $obj->setear($param['id'], $param['nombreUsuario'], $param['email'], $param['password']); // Establece sus valores
+    private function cargarObjetoConClave($param)
+    {
+        $obj = null;
+        if (isset($param['idusuario'])) {
+            $obj = new Usuario();
+            $obj->setear($param['idusuario'], null, null, null, null);
         }
-        return $obj; // Devuelve el objeto cargado o null si no se cargó
+        return $obj;
     }
 
-
-
-    
     /**
-     * Método para dar de alta un nuevo usuario en la base de datos
+     * Corrobora que dentro del arreglo asociativo estan seteados los campos claves
      * @param array $param
-     * @return boolean Devuelve true si el alta fue exitosa, de lo contrario false
+     * @return boolean
      */
-    public function alta($param) {
+
+    private function seteadosCamposClaves($param)
+    {
+        $resp = false;
+        if (isset($param['idusuario'])) {
+            $resp = true;
+        }
+
+        return $resp;
+    }
+
+    public function alta($param)
+    {
         $resp = false;
         $param['id'] = null;
-        $objTabla = $this->cargarObjeto($param);
-        
-        if ($objTabla != null) {
-            echo "Objeto Usuario creado correctamente"; // Depuración
-            if ($objTabla->insertar()) {
-                $resp = true;
-                echo "Inserción exitosa desde ABMUsuario"; // Depuración
-            } else {
-                echo "Fallo en la inserción desde ABMUsuario"; // Depuración
-            }
+        $elObjtTabla = $this->cargarObjeto($param);
+        if ($elObjtTabla != null && $elObjtTabla->insertar()) {
+            $resp = true;
         } else {
-            echo "No se pudo crear el objeto Usuario"; // Depuración
+            $elObjtTabla->getmensajeoperacion(); // Para depuración
         }
         return $resp;
     }
 
-
-
-
-    /**
-     * Permite eliminar un usuario de la base de datos
-     * @param array $param
-     * @return boolean Devuelve true si la eliminación fue exitosa, de lo contrario false
-     */
-    public function baja($param) {
-        $resp = false; // Inicializa la respuesta como falsa
-
-        // Verifica si están seteados los campos claves (id)
-        if (isset($param['id'])) {
-            $objTabla = new Usuario(); // Crea un nuevo objeto Usuario
-            $objTabla->setear($param['id'], null, null, null); // Establece el id en el objeto
-
-            // Si el objeto se creó correctamente y se elimina, devuelve true
-            if ($objTabla != null && $objTabla->eliminar()) {
-                $resp = true; // Cambia la respuesta a verdadera
-            }
-        }
-        return $resp; // Devuelve true si la baja fue exitosa, de lo contrario false
-    }
-
-    /**
-     * Permite modificar un usuario en la base de datos
-     * @param array $param
-     * @return boolean Devuelve true si la modificación fue exitosa, de lo contrario false
-     */
-    public function modificacion($param) {
-        $resp = false; // Inicializa la respuesta como falsa
-
-        // Verifica si están seteados los campos claves (id)
-        if (isset($param['id'])) {
-            $objTabla = $this->cargarObjeto($param); // Carga el objeto Usuario con los datos del array $param
-
-            // Si el objeto se creó correctamente y se modifica, devuelve true
-            if ($objTabla != null && $objTabla->modificar()) {
-                $resp = true; // Cambia la respuesta a verdadera
-            }
-        }
-        return $resp; // Devuelve true si la modificación fue exitosa, de lo contrario false
-    }
-
-    public function obtenerPorEmail($db, $email)
+    public function borrar_rol($param)
     {
-        $query = "SELECT * FROM usuarios WHERE email = :email LIMIT 1"; // Ajusta el nombre de la tabla
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $resp = false;
+        if (isset($param['idusuario']) && isset($param['idrol'])) {
+            $elObjtTabla = new UsuarioRol();
+            $elObjtTabla->setearConClave($param['idusuario'], $param['idrol']);
+            $resp = $elObjtTabla->eliminar();
+
+        }
+
+        return $resp;
+
     }
 
+    public function alta_rol($param)
+    {
+        $resp = false;
+        if (isset($param['idusuario']) && isset($param['idrol'])) {
+            $elObjtTabla = new UsuarioRol();
+            $elObjtTabla->setearConClave($param['idusuario'], $param['idrol']);
+            $resp = $elObjtTabla->insertar();
 
+        }
 
-    
+        return $resp;
+
+    }
+
     /**
-     * Permite buscar usuarios en la base de datos según criterios
+     * permite eliminar un objeto
      * @param array $param
-     * @return array Devuelve un arreglo con los usuarios que coinciden con los criterios de búsqueda
+     * @return boolean
      */
-    public function buscar($param) {
-        $where = " true "; // Inicializa la condición de búsqueda con "true" (equivale a no filtrar)
+    public function baja($param)
+    {
+        $resp = false;
+        if ($this->seteadosCamposClaves($param)) {
+            $elObjtTabla = $this->cargarObjetoConClave($param);
+            if ($elObjtTabla != null and $elObjtTabla->eliminar()) {
+                $resp = true;
+            }
+        }
 
-        // Si se pasa el id como parámetro, lo añade a la cláusula WHERE
+        return $resp;
+    }
+
+    /**
+     * permite modificar un objeto
+     * @param array $param
+     * @return boolean
+     */
+    public function modificacion($param)
+    {
+        //echo "Estoy en modificacion";
+        $resp = false;
+        if ($this->seteadosCamposClaves($param)) {
+            $elObjtTabla = $this->cargarObjeto($param);
+            if ($elObjtTabla != null and $elObjtTabla->modificar()) {
+                $resp = true;
+            }
+        }
+        return $resp;
+    }
+
+    public function darRoles($param)
+    {
+        $where = " true ";
+        if ($param != null) {
+            if (isset($param['idusuario'])) {
+                $where .= " and idusuario =" . $param['idusuario'];
+            }
+
+            if (isset($param['idrol'])) {
+                $where .= " and idrol ='" . $param['idrol'] . "'";
+            }
+
+        }
+        $obj = new UsuarioRol();
+        $arreglo = $obj->listar($where);
+        //echo "Van ".count($arreglo);
+        return $arreglo;
+    }
+
+    /**
+     * permite buscar un objeto
+     * @param array $param
+     * @return array
+     */
+    public function buscar($param)
+    {
+        $where = " true ";
         if ($param != null) {
             if (isset($param['id'])) {
                 $where .= " and id =" . $param['id'];
             }
-            
-            // Si se pasa el nombre de usuario como parámetro, lo añade a la cláusula WHERE
-            if (isset($param['nombreUsuario'])) {
-                $where .= " and nombre_usuario ='" . $param['nombreUsuario'] . "'";
-            }
-        }
 
-        $obj = new Usuario(); // Crea un nuevo objeto Usuario
-        $arreglo = $obj->listar($where); // Llama al método `listar` de la clase Usuario con la cláusula WHERE
-        return $arreglo; // Devuelve el arreglo con los resultados de la búsqueda
+            if (isset($param['nombreUsuario'])) {
+                $where .= " and nombreUsuario ='" . $param['nombreUsuario'] . "'";
+            }
+
+            if (isset($param['mail'])) {
+                $where .= " and mail ='" . $param['mail'] . "'";
+            }
+
+            if (isset($param['password'])) {
+                $where .= " and password ='" . $param['password'] . "'";
+            }
+
+            if (isset($param['usdeshabilitado'])) {
+                $where .= " and usdeshabilitado +='" . $param['usdeshabilitado'] . "'";
+            }
+
+        }
+        $obj = new Usuario();
+        $arreglo = $obj->listar($where);
+        echo "Van " . count($arreglo);
+        return $arreglo;
     }
+
+    public function insertarUser($param)
+    {
+        $objUser = new Usuario($param['nombreUsuario'], $param['password'], $param['mail'], $param['usdeshabilitado']);
+        $objUser->insertar();
+
+    }
+
 }
-?>
