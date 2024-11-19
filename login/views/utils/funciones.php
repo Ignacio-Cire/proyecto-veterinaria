@@ -40,7 +40,7 @@ spl_autoload_register(function ($clase) {
     $directorys = array(
         $GLOBALS['ROOT'] . 'models/',
         $GLOBALS['ROOT'] . 'controller/',
-        $GLOBALS['ROOT'] . 'modelo/conector/',
+        $GLOBALS['ROOT'] . 'models/conector/',
         $GLOBALS['ROOT'] . 'utils/',
     );
     // print_r($directorys) ;

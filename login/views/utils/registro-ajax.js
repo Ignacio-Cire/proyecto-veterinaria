@@ -1,60 +1,61 @@
-function handleSubmit(event) {
-    event.preventDefault(); // Evita el envío inmediato del formulario.
 
-        const password = document.getElementById("password").value;
-        
-        // Generar el hash MD5 de la contraseña.
-        const hashHex = CryptoJS.MD5(password).toString();
-        console.log("Hash MD5:", hashHex);
 
-        // Asigna el hash al campo de entrada de la contraseña.
-        document.getElementById("password").value = hashHex;
+// Manejo del envío del formulario
+$('#miFormulario').submit(function (e) {
+    e.preventDefault(); // Previene el envío automático del formulario
 
-        const captchaResponse = grecaptcha.getResponse();
+    // Captura los valores de los campos del formulario
+    const nombreUsuario = $('#nombreUsuario').val().trim();
+    const email = $('#email').val().trim();
+    const password = $('#password').val().trim();
+    const recaptchaResponse = grecaptcha.getResponse(); // Captura la respuesta del reCAPTCHA
 
-    // Verificar que se haya completado el CAPTCHA.
-    if (!captchaResponse) {
-        mostrarMensaje('Por favor, verifica el CAPTCHA.', 'warning');
+    // Validación básica: Verifica que los campos no estén vacíos
+    if (nombreUsuario === "" || email === "" || password === "") {
+        alert("Debe completar todos los campos.");
         return;
     }
 
-    // Crear FormData para enviar los datos.
-    const formData = new FormData();
-    formData.append("nombreUsuario", document.getElementById("nombreUsuario").value);
-    formData.append("email", document.getElementById("email").value);
-    formData.append("password", hashHex);
-    formData.append("g-recaptcha-response", captchaResponse);
-   // console.log("formData", formData);
-    for (let [key, value] of formData) {
-        console.log(`${key}: ${value}`)
-
+    // Validación del reCAPTCHA: Verifica que el usuario haya completado el reCAPTCHA
+    if (recaptchaResponse === "") {
+        alert("Debe completar el reCAPTCHA.");
+        return;
     }
-    // Enviar los datos mediante AJAX.
 
- 
+    // Creación del objeto de datos para enviar
+    const datos = {
+        nombreUsuario: nombreUsuario,
+        email: email,
+        password: password, // Se envía la contraseña tal cual (sin encriptar, aunque sería mejor encriptarla en el backend)
+        recaptchaResponse: recaptchaResponse
+    };
 
+    // Petición AJAX para enviar los datos al servidor
     $.ajax({
+        type: "POST",
         url: '../action/verificarRegistro.php',
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-       // processData: false,
-        //contentType: false,
-        success: function(response) {
-            console.log(response);
-
-            if (response.status === 'success') {
-                mostrarMensaje("Registro exitoso");
-                window.location.href = '../Login/login.php';
-            } else {
-                mostrarMensaje("Error en el registro: " + response.message);
+        data: datos,
+        success: function (response) {
+            console.log("Respuesta del servidor:", response);
+            try {
+                const res = JSON.parse(response);
+                // Si el registro es exitoso
+                if (res.success) {
+                    alert("Registro exitoso. Redirigiendo al inicio de sesión...");
+                    window.location.href = "./login.php";
+                } else {
+                    // Mensaje de error proporcionado por el backend
+                    alert(res.message || "No se pudo concretar el registro.");
+                }
+            } catch (error) {
+                alert("Error procesando la respuesta del servidor.");
+                console.error(error);
             }
         },
-        error: function(xhr, status, error) {
-            console.error("Error en la solicitud AJAX:", status, error);
+        error: function (xhr, status, error) {
+            // Manejo de errores en la petición AJAX
+            alert("Hubo un error en el registro. Intente nuevamente más tarde.");
+            console.error("Error:", error);
         }
     });
-}
-
-// Asociar el evento 'submit' del formulario.
-document.getElementById("miFormulario").addEventListener("submit", handleSubmit);
+});

@@ -117,6 +117,7 @@ class ABMUsuario
 
     }
 
+
     public function alta_rol($param)
     {
         $resp = false;
@@ -130,6 +131,7 @@ class ABMUsuario
         return $resp;
 
     }
+
 
     /**
      * permite eliminar un objeto
@@ -154,6 +156,8 @@ class ABMUsuario
      * @param array $param
      * @return boolean
      */
+
+
     public function modificacion($param)
     {
         //echo "Estoy en modificacion";
@@ -203,16 +207,16 @@ class ABMUsuario
                 $where .= " and nombreUsuario ='" . $param['nombreUsuario'] . "'";
             }
 
-            if (isset($param['mail'])) {
-                $where .= " and mail ='" . $param['mail'] . "'";
+            if (isset($param['email'])) {
+                $where .= " and mail ='" . $param['email'] . "'";
             }
 
             if (isset($param['password'])) {
                 $where .= " and password ='" . $param['password'] . "'";
             }
 
-            if (isset($param['usdeshabilitado'])) {
-                $where .= " and usdeshabilitado +='" . $param['usdeshabilitado'] . "'";
+            if (isset($param['usDeshabilitado'])) {
+                $where .= " and usDeshabilitado +='" . $param['usdeshabilitado'] . "'";
             }
 
         }
@@ -222,11 +226,66 @@ class ABMUsuario
         return $arreglo;
     }
 
-    public function insertarUser($param)
-    {
-        $objUser = new Usuario($param['nombreUsuario'], $param['password'], $param['mail'], $param['usdeshabilitado']);
-        $objUser->insertar();
 
+    public function usuarioExiste($nombreUsuario, $email)
+    {
+        $respuesta = false;
+        $list = $this->buscar(null);
+        foreach ($list as $usActual) {
+            if (($usActual->getusnombre() == $nombreUsuario) || ($usActual->getusmail() == $email)) {
+                $respuesta = true;
+            }
+        }
+        return $respuesta;
     }
+
+    private function cargarObjetoSinID($param)
+    {
+        $obj = null;
+        if (
+            array_key_exists('nombreUsuario', $param) &&
+            array_key_exists('password', $param) &&
+            array_key_exists('email', $param) &&
+            array_key_exists('usDeshabilitado', $param)
+        ) {
+            $obj = new usuario();
+            $obj->setearSinID($param['nombreUsuario'], $param['password'], $param['email'], $param['usDeshabilitado']);
+        }
+        return $obj;
+    }
+
+    public function altaSinID($param)
+    {
+        $resp = false;
+
+        $objUsuario = $this->cargarObjetoSinID($param);
+        if ($objUsuario != null and $objUsuario->insertar()) {
+            $resp = true;
+        }
+        return $resp;
+    }
+
+    public function insertUser($data)
+    {
+        // Este método verifica si ya existe un usuario registrado con el nombre de usuario o correo electrónico proporcionados.
+        $respuesta = false;
+        if (!$this->usuarioExiste($data['nombreUsuario'], $data['email'])) {
+
+            if ($this->altaSinID($data)) {
+                $objUs = $this->buscar(['nombreUsuario' => $data['nombreUsuario'], 'email' => $data['email']]);
+                $objUsRol = new ABMUsuarioRol();
+                if (isset($data['idrol'])) {
+                    $respuesta = $objUsRol->alta(['idrol' => $data['idrol'], 'idusuario' => $objUs[0]->getidusuario()]);
+                } else {
+                    $respuesta = $objUsRol->alta(['idrol' => 3, 'idusuario' => $objUs[0]->getID()]);
+                }
+            }
+        }
+        return $respuesta;
+    }
+
+    
+
+   
 
 }

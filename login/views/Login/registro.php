@@ -42,6 +42,7 @@ include_once '../estructura/nav.php';
                     <div class="form-group text-center">
                         <div class="g-recaptcha" data-sitekey="6LfhnVkqAAAAAG7ueEm-vYRbLO1u2xLsECX_IOIF"></div>
                     </div>
+
                     <!-- Botón de Registro -->
                     <button type="submit" class="btn btn-primary btn-block mt-4">Registrarse</button>
                     <!-- Enlace a Iniciar Sesión -->
@@ -61,30 +62,8 @@ include_once '../estructura/footer.php';
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/scrypt-js@3.0.1/scrypt.min.js"></script>
+    <script src="../utils/registro-ajax.js"></script>
 
-   <script>
-        $(document).ready(function() {
-            $('#miFormulario').submit(function(e) {
-                e.preventDefault();
-                var datos = $(this).serialize();
-                $.ajax({
-                    type: 'POST',
-                    url: '../action/verificarRegistro.php',
-                    data: datos,
-                    success: function(data) {
-                        console.log(data);
-                        var respuesta = JSON.parse(data);
-                        console.log(respuesta);
-                        if (respuesta.status === 'success') {
-                            alert(respuesta.message);
-                            window.location.href = 'login.php';
-                        } else {
-                            alert(respuesta.message);
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+   
 </body>
 </html>
