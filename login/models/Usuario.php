@@ -96,14 +96,17 @@ class Usuario extends BaseDatos
 
     }
 
+
+    
+    //insertar funciona
     public function insertar()
     {
         $resp = false;
         $sql = "INSERT INTO usuario(nombreUsuario,password,email,usDeshabilitado)
             VALUES('" . $this->getusnombre() . "','" . $this->getuspass() . "','" . $this->getusmail() . "'," . ($this->getusdeshabilitado() === null ? 'NULL' : "'" . $this->getusdeshabilitado() . "'") . ");";
-            // Verificar si la conexión está funcionando
+          
 
-   
+
         if ($this->Iniciar()) {
             if ($elid = $this->Ejecutar($sql)) {
                 $this->setidusuario($elid);
@@ -117,7 +120,11 @@ class Usuario extends BaseDatos
             echo "Error al iniciar conexión: " . $this->getmensajeoperacion(); // Para depuración
         }
         return $resp;
+
+        
     }
+
+
 
     //MODIFICAR VARIABLES
     public function modificar()

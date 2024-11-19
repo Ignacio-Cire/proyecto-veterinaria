@@ -117,7 +117,6 @@ class ABMUsuario
 
     }
 
-
     public function alta_rol($param)
     {
         $resp = false;
@@ -131,7 +130,6 @@ class ABMUsuario
         return $resp;
 
     }
-
 
     /**
      * permite eliminar un objeto
@@ -156,7 +154,6 @@ class ABMUsuario
      * @param array $param
      * @return boolean
      */
-
 
     public function modificacion($param)
     {
@@ -197,40 +194,41 @@ class ABMUsuario
      */
     public function buscar($param)
     {
-        $where = " true ";
+        $where = "";
         if ($param != null) {
-            if (isset($param['id'])) {
-                $where .= " and id =" . $param['id'];
+
+            if (isset($param['idusuario'])) {
+                $where .= " idusuario =" . $param['idusuario'];
+            }
+          
+            if (isset($param['nombreUsuario'])) {
+                $where .= "and  nombreUsuario ='" . $param['nombreUsuario'] . "'";
             }
 
-            if (isset($param['nombreUsuario'])) {
-                $where .= " and nombreUsuario ='" . $param['nombreUsuario'] . "'";
+            if (isset($param['password'])) {
+                $where .= " and uspass ='" . $param['password'] . "'";
             }
 
             if (isset($param['email'])) {
                 $where .= " and mail ='" . $param['email'] . "'";
             }
 
-            if (isset($param['password'])) {
-                $where .= " and password ='" . $param['password'] . "'";
-            }
+            
 
-            if (isset($param['usDeshabilitado'])) {
-                $where .= " and usDeshabilitado +='" . $param['usDeshabilitado'] . "'";
-            }
-
+          
         }
         $obj = new Usuario();
         $arreglo = $obj->listar($where);
-        
+
         return $arreglo;
     }
+
 
 
     public function usuarioExiste($nombreUsuario, $email)
     {
         $respuesta = false;
-        $list = $this->buscar(null);
+        $list = $this->buscar($nombreUsuario,$email);
         foreach ($list as $usActual) {
             if (($usActual->getusnombre() == $nombreUsuario) || ($usActual->getusmail() == $email)) {
                 $respuesta = true;
@@ -239,57 +237,28 @@ class ABMUsuario
         return $respuesta;
     }
 
-
-
-    private function cargarObjetoSinID($param)
-    {
-        $obj = null;
-        if (
-            array_key_exists('nombreUsuario', $param) &&
-            array_key_exists('password', $param) &&
-            array_key_exists('email', $param) &&
-            array_key_exists('usDeshabilitado', $param)
-        ) {
-            $obj = new usuario();
-            $obj->setearSinID($param['nombreUsuario'], $param['password'], $param['email'], $param['usDeshabilitado']);
-        }
-        return $obj;
-    }
-
     
-
-    public function altaSinID($param)
-    {
-        $resp = false;
-
-        $objUsuario = $this->cargarObjetoSinID($param);
-        if ($objUsuario != null and $objUsuario->insertar()) {
-            $resp = true;
-        }
-        return $resp;
-    }
-
     public function insertUser($data)
     {
-        // Este método verifica si ya existe un usuario registrado con el nombre de usuario o correo electrónico proporcionados.
         $respuesta = false;
-        if (!$this->usuarioExiste($data['nombreUsuario'], $data['email'])) {
 
-            if ($this->altaSinID($data)) {
-                $objUs = $this->buscar(['nombreUsuario' => $data['nombreUsuario'], 'email' => $data['email']]);
-                $objUsRol = new ABMUsuarioRol();
-                if (isset($data['idrol'])) {
-                    $respuesta = $objUsRol->alta(['idrol' => $data['idrol'], 'idusuario' => $objUs[0]->getidusuario()]);
-                } else {
-                    $respuesta = $objUsRol->alta(['idrol' => 3, 'idusuario' => $objUs[0]->getID()]);
-                }
-            }
-        }
+        // $existe= $this->usuarioExiste($data['nombreUsuario'], $data['email']);
+
+        // if (!$existe) {
+
+             // Crear un objeto Usuario
+        $objUsuario = new Usuario();
+
+        // Configurar el objeto Usuario con los datos proporcionados
+        $objUsuario->setusnombre($data['nombreUsuario']);
+        $objUsuario->setusmail($data['email']);
+        $objUsuario->setuspass($data['password']);
+        // Llamar al método insertar() del objeto Usuario
+        $respuesta = $objUsuario->insertar();
+           
+        // }
+        
         return $respuesta;
     }
-
-    
-
-   
 
 }

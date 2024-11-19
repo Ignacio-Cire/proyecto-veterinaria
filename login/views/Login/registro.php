@@ -38,10 +38,10 @@ include_once '../estructura/nav.php';
                         <label for="password"></label>
                         <input id="password" type="password" class="form-control" name="password" placeholder="Ingrese su clave" required>
                     </div>
-                    <!-- reCAPTCHA -->
+                    <!-- reCAPTCHA
                     <div class="form-group text-center">
                         <div class="g-recaptcha" data-sitekey="6LfhnVkqAAAAAG7ueEm-vYRbLO1u2xLsECX_IOIF"></div>
-                    </div>
+                    </div> -->
 
                     <!-- Botón de Registro -->
                     <button type="submit" class="btn btn-primary btn-block mt-4">Registrarse</button>

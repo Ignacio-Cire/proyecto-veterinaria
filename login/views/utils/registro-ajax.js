@@ -8,7 +8,7 @@ $('#miFormulario').submit(function (e) {
     const nombreUsuario = $('#nombreUsuario').val().trim();
     const email = $('#email').val().trim();
     const password = $('#password').val().trim();
-    const recaptchaResponse = grecaptcha.getResponse(); // Captura la respuesta del reCAPTCHA
+    // const recaptchaResponse = grecaptcha.getResponse(); // Captura la respuesta del reCAPTCHA
 
     // Validación básica: Verifica que los campos no estén vacíos
     if (nombreUsuario === "" || email === "" || password === "") {
@@ -16,18 +16,18 @@ $('#miFormulario').submit(function (e) {
         return;
     }
 
-    // Validación del reCAPTCHA: Verifica que el usuario haya completado el reCAPTCHA
-    if (recaptchaResponse === "") {
-        alert("Debe completar el reCAPTCHA.");
-        return;
-    }
+    // // Validación del reCAPTCHA: Verifica que el usuario haya completado el reCAPTCHA
+    // if (recaptchaResponse === "") {
+    //     alert("Debe completar el reCAPTCHA.");
+    //     return;
+    // }
 
     // Creación del objeto de datos para enviar
     const datos = {
         nombreUsuario: nombreUsuario,
         email: email,
         password: password, // Se envía la contraseña tal cual (sin encriptar, aunque sería mejor encriptarla en el backend)
-        recaptchaResponse: recaptchaResponse
+        // recaptchaResponse: recaptchaResponse
     };
 
     // Petición AJAX para enviar los datos al servidor
@@ -36,9 +36,10 @@ $('#miFormulario').submit(function (e) {
         url: '../action/verificarRegistro.php',
         data: datos,
         success: function (response) {
-            console.log("Respuesta del servidor:", response);
+           
             try {
                 const res = JSON.parse(response);
+               
                 // Si el registro es exitoso
                 if (res.success) {
                     alert("Registro exitoso. Redirigiendo al inicio de sesión...");
