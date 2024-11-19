@@ -1,6 +1,6 @@
 <?php
-
-require '../../../vendor/autoload.php';
+require '../../../vendor/autoload.php'; // Composer para manejar dependencias
+require '../../../configuracion.php';  // Configuración incluida manualmente
 
 use GuzzleHttp\Client;
 
@@ -35,21 +35,22 @@ function validarCaptcha($captcha)
     return isset($responseKeys['success']) && $responseKeys['success'] === true;
 }
 
+// Registrar el autoload
 spl_autoload_register(function ($clase) {
-    // echo "Cargamos la clase  ".$clase."<br>" ;
     $directorys = array(
-        $GLOBALS['ROOT'] . 'models/',
-        $GLOBALS['ROOT'] . 'controller/',
-        $GLOBALS['ROOT'] . 'models/conector/',
-        $GLOBALS['ROOT'] . 'utils/',
+        __DIR__ . '/../../models/',
+        __DIR__ . '/../../controller/',
+        __DIR__ . '/../../models/conector/',
+        __DIR__ . '/../utils/',
+        __DIR__ . '/../../views/',
+        __DIR__ . '/../../views/action/',
     );
-    // print_r($directorys) ;
+
     foreach ($directorys as $directory) {
-        if (file_exists($directory . $clase . '.php')) {
-            // echo "se incluyo".$directory.$class_name . '.php';
-            require_once ($directory . $clase . '.php');
+        $archivo = $directory . $clase . '.php';
+        if (file_exists($archivo)) {
+            require_once $archivo;
             return;
         }
     }
-
 });

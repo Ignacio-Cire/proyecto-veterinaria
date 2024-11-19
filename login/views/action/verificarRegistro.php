@@ -6,6 +6,7 @@ include_once '../../../configuracion.php';
 $datos = datasubmitted();
 
 $objAbmUsuario = new ABMUsuario();
+$abmUsuario = $objAbmUsuario;
 
 echo json_encode($abmUsuario->insertUser($datos));
 ?>

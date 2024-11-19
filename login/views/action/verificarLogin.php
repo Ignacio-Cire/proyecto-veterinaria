@@ -1,9 +1,7 @@
 <?php
 session_start();
-include_once '../utils/funciones.php';
-include_once '../../controller/ABMusuario.php';
-include_once '../../controller/ABMUsuarioRol.php';
-include_once '../../controller/session.php';
+
+
 
 $objSesion = new Session();
 

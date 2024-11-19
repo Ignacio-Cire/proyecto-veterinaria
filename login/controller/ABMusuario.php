@@ -216,13 +216,13 @@ class ABMUsuario
             }
 
             if (isset($param['usDeshabilitado'])) {
-                $where .= " and usDeshabilitado +='" . $param['usdeshabilitado'] . "'";
+                $where .= " and usDeshabilitado +='" . $param['usDeshabilitado'] . "'";
             }
 
         }
         $obj = new Usuario();
         $arreglo = $obj->listar($where);
-        echo "Van " . count($arreglo);
+        
         return $arreglo;
     }
 
@@ -239,6 +239,8 @@ class ABMUsuario
         return $respuesta;
     }
 
+
+
     private function cargarObjetoSinID($param)
     {
         $obj = null;
@@ -253,6 +255,8 @@ class ABMUsuario
         }
         return $obj;
     }
+
+    
 
     public function altaSinID($param)
     {

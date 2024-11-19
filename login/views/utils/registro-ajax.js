@@ -42,7 +42,7 @@ $('#miFormulario').submit(function (e) {
                 // Si el registro es exitoso
                 if (res.success) {
                     alert("Registro exitoso. Redirigiendo al inicio de sesión...");
-                    window.location.href = "./login.php";
+                    window.location.href = "../Login/login.php";
                 } else {
                     // Mensaje de error proporcionado por el backend
                     alert(res.message || "No se pudo concretar el registro.");
