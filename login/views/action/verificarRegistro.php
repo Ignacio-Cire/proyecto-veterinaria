@@ -5,8 +5,13 @@ include_once '../../../configuracion.php';
 // Obtiene los datos enviados
 $datos = datasubmitted();
 
+error_log(print_r($datos, true)); // Log para verificar los datos enviados
+
 $objAbmUsuario = new ABMUsuario();
 $abmUsuario = $objAbmUsuario;
+
+
+
 
 $resultado = $abmUsuario->insertUser($datos);
 
