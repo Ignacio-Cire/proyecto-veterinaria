@@ -9,13 +9,14 @@ include_once '../estructura/nav.php';
     <title>Login con reCAPTCHA</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../estructura/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="card shadow-sm" style="width: 400px;">
             <div class="card-body">
                 <h3 class="text-center mb-4">Iniciar Sesión</h3>
-                <form id="loginForm">
+                <form id="loginForm" method='POST'>
                     <!-- Campo de Email -->
                     <div class="form-group">
                         <label for="email"></label>
@@ -26,12 +27,12 @@ include_once '../estructura/nav.php';
                         <label for="password"></label>
                         <input type="password" id="password" class="form-control" placeholder="Ingrese la clave" required>
                     </div>
-                    <!-- reCAPTCHA -->
+                    <!-- reCAPTCHA
                     <div class="form-group text-center">
                         <div class="g-recaptcha" data-sitekey="6LfhnVkqAAAAAG7ueEm-vYRbLO1u2xLsECX_IOIF"></div>
-                    </div>
+                    </div> -->
                     <!-- Botón de Iniciar Sesión -->
-                    <button type="button" id="loginButton" class="btn btn-primary btn-block mt-4">Iniciar Sesión</button>
+                    <button type="submit" id="loginButton" class="btn btn-primary btn-block mt-4">Iniciar Sesión</button>
                     <!-- Enlace a Registro -->
                     <p class="text-center mt-3">
                         ¿No tienes cuenta? <a href="registro.php">Regístrate</a>

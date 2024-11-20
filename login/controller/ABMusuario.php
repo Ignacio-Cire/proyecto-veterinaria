@@ -197,24 +197,10 @@ class ABMUsuario
         $where = "";
         if ($param != null) {
 
-            if (isset($param['idusuario'])) {
-                $where .= " idusuario =" . $param['idusuario'];
-            }
-          
-            if (isset($param['nombreUsuario'])) {
-                $where .= "and  nombreUsuario ='" . $param['nombreUsuario'] . "'";
-            }
-
-            if (isset($param['password'])) {
-                $where .= " and uspass ='" . $param['password'] . "'";
-            }
 
             if (isset($param['email'])) {
-                $where .= " and mail ='" . $param['email'] . "'";
+                $where .= "  email ='" . $param['email'] . "'";
             }
-
-            
-
           
         }
         $obj = new Usuario();
@@ -225,26 +211,32 @@ class ABMUsuario
 
 
 
-    public function usuarioExiste($nombreUsuario, $email)
+    public function usuarioExiste($data)
     {
-        $respuesta = false;
-        $list = $this->buscar($nombreUsuario,$email);
+        $respuesta = false; // Bandera inicializada como false
+        // Obtiene la lista de usuarios basada en los datos proporcionados
+        $list = $this->buscar($data);
+    
+        // Recorre la lista de usuarios
         foreach ($list as $usActual) {
-            if (($usActual->getusnombre() == $nombreUsuario) || ($usActual->getusmail() == $email)) {
-                $respuesta = true;
+            // Verifica si el correo coincide con el proporcionado
+            if ($usActual->getusmail() === $data['email']) {
+                $respuesta = true; // Cambia la bandera a true si encuentra coincidencia
             }
         }
-        return $respuesta;
+    
+        return $respuesta; // Retorna la bandera
     }
+    
+
 
     
     public function insertUser($data)
     {
         $respuesta = false;
 
-        // $existe= $this->usuarioExiste($data['nombreUsuario'], $data['email']);
-
-        // if (!$existe) {
+        $existe= $this->usuarioExiste($data);
+        if ($existe == false){
 
              // Crear un objeto Usuario
         $objUsuario = new Usuario();
@@ -256,9 +248,11 @@ class ABMUsuario
         // Llamar al método insertar() del objeto Usuario
         $respuesta = $objUsuario->insertar();
            
-        // }
+        }
         
         return $respuesta;
     }
 
 }
+
+

@@ -2,18 +2,19 @@
 session_start();
 
 // Asegúrate de incluir la clase Session
-include_once '../../controller/session.php'; // O la ruta correcta de tu clase Session
+include_once '../../../configuracion.php';
+include_once '../utils/funciones.php';
 
 // Crear la instancia de la clase Session
 $objSession = new Session();
 
 // Verificar si el usuario está autenticado
-if (!$objSession->validar()) {
-    echo "No se pudo iniciar sesión. Redirigiendo a la página de login.";
+if ($objSession->validar()) {
+
+    
     exit;
 }
 
-// Aquí accedes a los datos de la sesión correctamente
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +28,7 @@ if (!$objSession->validar()) {
 <body>
     <div class="container mt-5">
         <h1>Bienvenido/a!</h1>
-        <p>Hola, <?php echo isset($_SESSION['nombreUsuario']) ? htmlspecialchars($_SESSION['nombreUsuario']) : 'Usuario'; ?>. Has iniciado sesión exitosamente.</p>
+        <p>Hola, <?php echo isset($_SESSION['nombreUsuario']) ? htmlspecialchars($objSession->getUsuario()) : 'Usuario'; ?>. Has iniciado sesión exitosamente.</p>
 
         
         <!-- Botón para cerrar sesión -->

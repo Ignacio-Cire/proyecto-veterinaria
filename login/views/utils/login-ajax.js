@@ -1,62 +1,57 @@
+// Manejo del envío del formulario
+$('#loginForm').submit(function (e) {
+    e.preventDefault(); // Previene el envío automático del formulario
 
-$(document).ready(function () {
-    // Evento click para el botón de login
-    $('#loginButton').on('click', function () {
-        // Obtiene los valores de email y password
-        const email = $('#email').val().trim();
-        const password = $('#password').val().trim();
+    // Captura los valores de los campos del formulario
+    const email = $('#email').val().trim();
+    const password = $('#password').val().trim();
+    // const recaptchaResponse = grecaptcha.getResponse(); // Captura la respuesta del reCAPTCHA
 
-        // Validar que los campos no estén vacíos
-        if (email === '' || password === '') {
-            mostrarMensaje('Por favor, completa todos los campos.', 'danger');
-            return;
-        }
-
-        // Verificar si el CAPTCHA ha sido completado
-        const captchaResponse = grecaptcha.getResponse();
-        if (!captchaResponse) {
-            mostrarMensaje('Por favor, verifica el CAPTCHA.', 'warning');
-            return;
-        }
-
-        // Datos para enviar al servidor
-        const formData = {
-            email: email,
-            password: password,
-            'g-recaptcha-response': captchaResponse
-        };
-
-        // Enviar los datos usando AJAX
-        $.ajax({
-            url: '../action/verificarLogin.php',
-            type: 'POST',
-            data: formData,
-            success: function (response) {
-                if (response.includes('Inicio de sesión exitoso')) {
-                    mostrarMensaje('Inicio de sesión exitoso. Redireccionando...', 'success');
-                    // Redireccionar después de 2 segundos
-                    setTimeout(() => {
-                        window.location.href = '../Login/paginaSegura.php';
-                    }, 2000);
-                } else {
-                    mostrarMensaje(response, 'danger');
-                }
-            },
-            error: function (xhr, status, error) {
-                mostrarMensaje('Ocurrió un error al procesar tu solicitud. Intenta de nuevo.', 'danger');
-                console.error('Error:', error);
-            }
-        });
-    });
-
-    // Función para mostrar mensajes con Bootstrap
-    function mostrarMensaje(mensaje, tipo) {
-        const alertBox = `
-            <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
-                ${mensaje}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        `;
-        $('#mensaje').html(alertBox);
+    // Validación básica: Verifica que los campos no estén vacíos
+    if (email === "" || password === "") {
+        alert("Debe completar todos los campos.");
+        return;
     }
+
+    // // Validación del reCAPTCHA: Verifica que el usuario haya completado el reCAPTCHA
+    // if (recaptchaResponse === "") {
+    //     alert("Debe completar el reCAPTCHA.");
+    //     return;
+    // }
+
+    // Genera el hash MD5 de la contraseña (puedes mantener la parte de MD5 si es el proceso que ya estás usando en la base de datos)
+    const hashedPassword = CryptoJS.MD5(password).toString();
+
+    // Creación del objeto de datos para enviar
+    const datos = {
+        email: email,
+        password: hashedPassword, // Envía la contraseña hasheada
+        // recaptchaResponse: recaptchaResponse
+    };
+
+    // Petición AJAX para enviar los datos al servidor
+    $.ajax({
+        type: "POST",
+        url: '../action/verificarLogin.php',
+        data: datos,
+        success: function (response) {
+            try {   
+                const res = JSON.parse(response);
+
+                // Si el login es exitoso
+                if (res.success) {
+                    alert("Inicio de sesión exitoso.");
+                
+                    window.location.href = "../Login/paginaSegura.php";
+                } else {
+                    // Mensaje de error proporcionado por el backend
+                    alert(res.message || "No se pudo iniciar sesión.");
+                }
+            } catch (error) {
+                alert("Error procesando la respuesta del servidor.");
+                console.error(error);
+            }
+        }
+       
+    });
 });

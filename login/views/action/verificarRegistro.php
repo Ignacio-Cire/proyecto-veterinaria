@@ -1,11 +1,11 @@
 <?php
 session_start();
 include_once '../../../configuracion.php';  
+include_once '../utils/funciones.php';
 
 // Obtiene los datos enviados
 $datos = datasubmitted();
 
-error_log(print_r($datos, true)); // Log para verificar los datos enviados
 
 $objAbmUsuario = new ABMUsuario();
 $abmUsuario = $objAbmUsuario;
@@ -24,7 +24,7 @@ if ($resultado) {
 } else {
     echo json_encode([
         'success' => false, 
-        'message' => 'No se pudo concretar el registro.'
+        'message' => 'este usuario ya esta registrado'
     ]);
 }
 

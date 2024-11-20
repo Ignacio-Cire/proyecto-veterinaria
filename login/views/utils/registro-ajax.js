@@ -48,6 +48,7 @@ $('#miFormulario').submit(function (e) {
         url: '../action/verificarRegistro.php',
         data: datos,
         success: function (response) {
+            console.log(response);
            
             try {   
                 const res = JSON.parse(response);

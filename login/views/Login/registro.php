@@ -61,9 +61,6 @@ include_once '../estructura/nav.php';
     <?php
 include_once '../estructura/footer.php';
 ?>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bcrypt.js/2.4.3/bcrypt.min.js"></script>
     <script src="../utils/registro-ajax.js"></script>
 
 

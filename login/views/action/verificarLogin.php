@@ -1,37 +1,37 @@
 <?php
-session_start();
+session_start(); // Inicia la sesión si no está iniciada
+include_once '../../../configuracion.php';  
+include_once '../utils/funciones.php';
 
-
-
+// Crear una instancia de la clase Session
 $objSesion = new Session();
 
-// Obtiene los datos enviados
+// Obtiene los datos del login (email y password hash)
 $datos = datasubmitted();
 
 
-// Crear una instancia de Usuario
+// Crear una instancia de ABMUsuario
+$usuario = new ABMUsuario();
 
-$usuario = new ABMusuario();
-$usuarioRol = new ABMUsuarioRol();
+$usuarioData = $usuario->buscar($datos);
 
-// Llama a tu método para obtener el usuario por email
-$usuarioData = $usuario->buscar($datos); //
+$hashedPassword = isset($datos['password']) ? $datos['password'] : '';
 
-if ($usuarioData) {
-    if (password_verify($password, $usuarioData['password'])) { // Verifica la contraseña
+// Verifica si se encontró el usuario
+if ($usuarioData && count($usuarioData) > 0) {
+    $usuarioData = $usuarioData[0]; // Obtenemos el primer usuario 
 
-        // Guarda la información del usuario en la sesión
-        $rolUs = $usuarioRol->obtenerRol($usuarioData['id']);
-        $objSesion->setUsuario($usuarioData['nombreUsuario']);
-        $objSesion->setIdUsuario($usuarioData['id']);
-        $objSesion->setRol($rolUs);
-
-        exit(); // Asegúrate de llamar a exit() después de la redirección
+    // Comparar los hashes de la contraseña
+    if ($hashedPassword === $usuarioData->getuspass()) {
+    
+        echo json_encode(['success' => true, 'message' => 'Login exitoso.']);
+        exit();
     } else {
-        echo 'La contraseña es incorrecta. Inténtalo de nuevo.';
+        echo json_encode(['success' => false, 'message' => 'La contraseña es incorrecta. Inténtalo de nuevo.']);
     }
 } else {
-    echo 'No existe un usuario con ese email. Por favor, verifica e intenta nuevamente.';
+    echo json_encode(['success' => false, 'message' => 'No existe un usuario con esos datos.']);
 }
 
 exit();
+?>
