@@ -25,13 +25,13 @@ include_once '../estructura/nav.php';
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="../../../imagen1.jpg" class="d-block w-100" alt="Imagen 1">
+            <img src="../../assests/img/imagen1.jpg" class="d-block w-100" alt="Imagen 1">
         </div>
         <div class="carousel-item">
-            <img src="../../../imagen2.jpg" class="d-block w-100" alt="Imagen 2">
+            <img src="../../assests/img/imagen2.jpg" class="d-block w-100" alt="Imagen 2">
         </div>
         <div class="carousel-item">
-            <img src="../../../imagen3.jpg" class="d-block w-100" alt="Imagen 3">
+            <img src="../../assests/img/imagen3.jpg" class="d-block w-100" alt="Imagen 3">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

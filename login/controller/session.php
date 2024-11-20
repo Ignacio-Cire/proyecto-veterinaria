@@ -60,7 +60,20 @@ class Session {
         }
         return null; // Si no está definido, devuelve null
     }
+    public function getEmail() {
+        if (isset($_SESSION['email'])) {
+            return $_SESSION['email'];
+        }
+        return null; // Si no está definido, devuelve null
+    }
     
+
+    public function setUsuario($nombreUsuario) {
+        $_SESSION['nombreUsuario'] = $nombreUsuario;
+    }
+    public function setEmail($email) {
+        $_SESSION['email'] = $email;
+    }
     
     /**
      * Devuelve el rol del usuario logeado

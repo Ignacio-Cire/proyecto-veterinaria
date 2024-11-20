@@ -35,14 +35,15 @@ $('#loginForm').submit(function (e) {
         url: '../action/verificarLogin.php',
         data: datos,
         success: function (response) {
-            try {   
+            try {
                 const res = JSON.parse(response);
 
                 // Si el login es exitoso
                 if (res.success) {
                     alert("Inicio de sesión exitoso.");
-                
-                    window.location.href = "../Login/paginaSegura.php";
+                    
+                    // Redirigir a la página segura para clientes (puedes modificarla si lo deseas)
+                    window.location.href = "../home/index-seguro.php";
                 } else {
                     // Mensaje de error proporcionado por el backend
                     alert(res.message || "No se pudo iniciar sesión.");
@@ -51,7 +52,9 @@ $('#loginForm').submit(function (e) {
                 alert("Error procesando la respuesta del servidor.");
                 console.error(error);
             }
+        },
+        error: function () {
+            alert("Hubo un error al procesar la solicitud.");
         }
-       
     });
 });

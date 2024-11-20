@@ -27,7 +27,7 @@
     <header>
         <!-- Logo y Nombre -->
         <div class="logo">
-            <a href="http://localhost:3000/login/views/home/index.php"><img src="../../../Logo.png" alt="Logo"></a> <!-- Asegúrate de poner la ruta correcta a tu imagen -->
+            <a href="http://localhost:3000/login/views/home/index.php"><img src="../../assests/img/Logo.png" alt="Logo"></a> 
         </div>
 
         <!-- Barra de búsqueda -->
@@ -59,7 +59,7 @@
     <div class="nav-links">
         <ul>
             <li><a href="../tienda.php">Tienda</a></li>
-            <li><a href="#">Ofertas</a></li>
+            <li><a href="http://localhost:3000/login/views/home/index-seguro.php">Ofertas</a></li>
             <li class="dropdown">
                 <a href="#">Categorías</a>
                 <ul class="dropdown-menu">
@@ -68,7 +68,7 @@
                 </ul>
             </li>
             <li><a href="#">Contacto</a></li>
-            <li><a href="#">Turnos</a></li>
+            <!-- <li><a href="#">Turnos</a></li> -->
         </ul>
     </div>
 </div>

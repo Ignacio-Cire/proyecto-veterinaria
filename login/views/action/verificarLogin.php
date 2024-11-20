@@ -23,7 +23,9 @@ if ($usuarioData && count($usuarioData) > 0) {
 
     // Comparar los hashes de la contraseña
     if ($hashedPassword === $usuarioData->getuspass()) {
-    
+        $objSesion->setUsuario($usuarioData->getusnombre());
+        $objSesion->setEmail($usuarioData->getusmail());
+
         echo json_encode(['success' => true, 'message' => 'Login exitoso.']);
         exit();
     } else {
