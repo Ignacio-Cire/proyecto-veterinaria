@@ -6,7 +6,7 @@ session_start();
 $objSession = new Session();
 $datos = datasubmitted();
 
-// Asegúrate de que el producto esté disponible en la solicitud
+
 if (isset($datos['producto'])) {
     $producto = $datos['producto'];
 

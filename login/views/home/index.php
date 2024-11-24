@@ -1,6 +1,10 @@
 <?php
-include_once '../estructura/nav.php';
+include_once '../../../configuracion.php'; // Configuración general
+include_once '../../controller/session.php'; // Controlador de sesión
+include_once '../estructura/nav.php'; // Usuario no logueado
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,14 +13,15 @@ include_once '../estructura/nav.php';
     <title>Proyecto Veterinaria</title>
     <!-- Enlace a Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../estructura/style.css">
-    <link rel="stylesheet" href="styleHome.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../assests/css/style.css">
 </head>
 <body><br><br>
 
-<nav></nav>
 
 <!-- Carrusel de imágenes -->
+
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -25,13 +30,13 @@ include_once '../estructura/nav.php';
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="../../assests/img/imagen1.jpg" class="d-block w-100" alt="Imagen 1">
+            <img src="../assests/img/imagen1.jpg" class="d-block w-100" alt="Imagen 1">
         </div>
         <div class="carousel-item">
-            <img src="../../assests/img/imagen2.jpg" class="d-block w-100" alt="Imagen 2">
+            <img src="../assests/img/imagen2.jpg" class="d-block w-100" alt="Imagen 2">
         </div>
         <div class="carousel-item">
-            <img src="../../assests/img/imagen3.jpg" class="d-block w-100" alt="Imagen 3">
+            <img src="../assests/img/imagen3.jpg" class="d-block w-100" alt="Imagen 3">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -44,15 +49,11 @@ include_once '../estructura/nav.php';
     </a>
 </div>
 
+<?php include_once '../estructura/footer.php'; ?>
 
-
-<br><br>
-<?php
-include_once '../estructura/footer.php';
-?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../utils/agregarCarrito.js"></script>
-<script src="../utils/carrito.js"></script>
+<script src="../assests/js/agregarCarrito.js"></script>
+<script src="../assests/js/carrito.js"></script>
 
 </body>
 </html>

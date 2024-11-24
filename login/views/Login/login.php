@@ -8,7 +8,11 @@ include_once '../estructura/nav.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login con reCAPTCHA</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../estructura/style.css">
+    <link rel="stylesheet" href="../assests/css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
@@ -16,7 +20,7 @@ include_once '../estructura/nav.php';
         <div class="card shadow-sm" style="width: 400px;">
             <div class="card-body">
                 <h3 class="text-center mb-4">Iniciar Sesión</h3>
-                <form id="loginForm" method='POST'>
+                <form id="loginForm" method="POST">
                     <!-- Campo de Email -->
                     <div class="form-group">
                         <label for="email"></label>
@@ -27,10 +31,10 @@ include_once '../estructura/nav.php';
                         <label for="password"></label>
                         <input type="password" id="password" class="form-control" placeholder="Ingrese la clave" required>
                     </div>
-                    <!-- reCAPTCHA
+                    <!-- reCAPTCHA -->
                     <div class="form-group text-center">
                         <div class="g-recaptcha" data-sitekey="6LfhnVkqAAAAAG7ueEm-vYRbLO1u2xLsECX_IOIF"></div>
-                    </div> -->
+                    </div>
                     <!-- Botón de Iniciar Sesión -->
                     <button type="submit" id="loginButton" class="btn btn-primary btn-block mt-4">Iniciar Sesión</button>
                     <!-- Enlace a Registro -->
@@ -42,13 +46,11 @@ include_once '../estructura/nav.php';
         </div>
     </div>
 
-    <?php include_once '../estructura/footer.php'; ?>
-
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../utils/agregarCarrito.js"></script>
-    <script src="../utils/carrito.js"></script>
-    <script src="../utils/login-ajax.js"></script> <!-- Archivo JS para manejar el clic -->
+    <?php 
+    include_once '../estructura/footer.php'; 
+    ?>
+    <script src="../assests/js/agregarCarrito.js"></script>
+    <script src="../assests/js/carrito.js"></script>
+    <script src="../assests/js/login-ajax.js"></script> <!-- Archivo JS para manejar el clic -->
 </body>
 </html>

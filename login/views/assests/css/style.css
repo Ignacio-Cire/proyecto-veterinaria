@@ -1,0 +1,282 @@
+/* Estilos generales para la página */
+body {
+    background-color: #f6efe8; /* Cambia este color al que prefieras */
+    font-family: avant;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Encabezado de las redes sociales (segundo encabezado) */
+.social-header {
+    background-color: #e8cc45;
+    color: #006400;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end; /* Alinea las redes sociales a la derecha */
+}
+
+.social-icons a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #a27430
+}
+
+/* Encabezado principal */
+header {
+    background-color: #33312A;
+    color: #022402;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Contenedor del logo */
+.logo img {
+    padding-left: 40px;
+    padding-bottom: 10px;
+    max-width: 150px;
+    height: 150px;
+}
+
+/* Nombre de la tienda pegado al logo */
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 1px; /* Reducido el margen para pegar el nombre al logo */
+    color: #fff;
+}
+
+/* Barra de búsqueda */
+.search-bar input[type="text"] {
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
+    width: 500px; /* Alarga la barra de búsqueda */
+}
+
+.search-bar button {
+    padding: 5px 10px;
+    background-color: #e8cc45;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    color: #333;
+}
+
+.search-bar button:hover {
+    background-color: #e88c00;
+    color: #fff;
+}
+
+/* Contenedor para el login, carrito y GitHub */
+.account-cart {
+    display: flex;
+    align-items: center;
+}
+
+.account-cart a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.account-cart a:hover {
+    color: #a27430
+}
+
+.cart-icon {
+    font-size: 20px;
+}
+
+/* Reset de algunos estilos por defecto */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+}
+
+/* Estilos del logo */
+.navbar .logo a {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+
+
+/* Estilos generales para la barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: center; /* Centra el contenido de la barra de navegación */
+    align-items: center;     /* Alinea los elementos verticalmente */
+    background-color: #e8cc45;
+    padding: 10px 20px;
+    width: 100%; /* Asegura que la barra ocupe el 100% del ancho de la página */
+}
+
+/* Menú de navegación */
+.nav-links ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: center; /* Centra los elementos dentro del <ul> */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links ul li {
+    margin: 0 20px;
+    position: relative; /* Necesario para el dropdown */
+}
+
+.nav-links ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.nav-links ul li a:hover {
+    color: #a27430; /* Cambia el color del enlace al pasar el mouse */
+}
+
+/* Estilos para el dropdown */
+.nav-links .dropdown {
+    position: relative; /* Necesario para el dropdown */
+}
+
+.nav-links .dropdown-menu {
+    display: none; /* Ocultamos el submenú por defecto */
+    position: absolute;
+    top: 100%; /* Lo coloca debajo del enlace "Categorías" */
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    list-style-type: none;
+    padding: 10px 0;
+    min-width: 160px; /* Asegura que el submenú tenga un ancho adecuado */
+}
+
+.nav-links .dropdown:hover .dropdown-menu {
+    display: block; /* Muestra el submenú cuando el mouse pasa sobre el contenedor */
+}
+
+.dropdown-menu li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f1f1f1; /* Color de fondo cuando se pasa el mouse sobre las opciones */
+}
+
+
+
+/* Estilos para la sección de cuenta */
+.account {
+    display: flex;
+    align-items: center;
+}
+
+.account a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.account a:hover {
+    color: #dc8a10;
+}
+
+/* Ajustes para achicar el carrusel */
+.carousel-inner {
+    max-width: 80%; /* Limita el ancho máximo del carrusel */
+    margin: 0 auto; /* Centra el carrusel horizontalmente */
+}
+
+.carousel-item img {
+    width: 100%; /* Hace que las imágenes ocupen todo el ancho del contenedor, manteniendo el tamaño */
+    height: 450px; /* Ajusta la altura de las imágenes */
+    object-fit: cover; /* Asegura que las imágenes no se deformen */
+}
+
+/* Ajuste de los controles prev/next para el carrusel */
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para los controles */
+}
+
+/* Ajuste de la velocidad de transición del carrusel */
+.carousel-item {
+    transition: transform 0.3s ease-in-out; /* 0.3s es el tiempo de transición, puedes cambiarlo para que sea más rápido */
+}
+
+
+
+
+/* Responsive: Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .search-bar {
+        margin: 10px 0;
+        width: 100%; /* La barra de búsqueda ocupa todo el ancho en pantallas pequeñas */
+    }
+
+    .account-cart {
+        margin-top: 10px;
+        justify-content: center; /* Centra los elementos en pantallas pequeñas */
+    }
+}
+
+
+/* Asegura que las imágenes dentro de las celdas tengan el mismo tamaño y se ajusten bien en la sección de medicamentos */
+#categorias .product-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* Hace que la imagen cubra el área sin deformarse */
+}
+
+/* Asegura que el texto dentro de las celdas esté alineado solo dentro de la sección de medicamentos */
+#categorias .table td, #medicamentos .table th {
+    vertical-align: middle; /* Centra el contenido verticalmente */
+    text-align: center; /* Centra el contenido horizontalmente */
+}
+
+/* Estilo para los enlaces para que sean visibles solo en la sección de medicamentos */
+#categorias .table td a {
+    text-decoration: none;
+    color: #000; /* Asegura que el texto sea visible */
+}
+
+/* Efecto al pasar el mouse sobre los enlaces solo en la sección de medicamentos */
+#categorias .table td a:hover {
+    color: #007bff; /* Cambia el color cuando se pasa el mouse */
+    text-decoration: underline;
+}

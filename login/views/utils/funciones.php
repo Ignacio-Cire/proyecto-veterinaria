@@ -17,23 +17,23 @@ function datasubmitted()
     return $datos;
 }
 
-// // Función para validar el CAPTCHA usando Guzzle
-// function validarCaptcha($captcha)
-// {
-//     $secretKey = '6LfhnVkqAAAAAAYhv6_sMWmJTAwtMErZLcOiVPvV';
-//     $client = new Client();
+// Función para validar el CAPTCHA usando Guzzle
+function validarCaptcha($captcha)
+{
+    $secretKey = '6LfhnVkqAAAAAAYhv6_sMWmJTAwtMErZLcOiVPvV';
+    $client = new Client();
 
-//     $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-//         'form_params' => [
-//             'secret' => $secretKey,
-//             'response' => $captcha,
-//         ],
-//     ]);
+    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+        'form_params' => [
+            'secret' => $secretKey,
+            'response' => $captcha,
+        ],
+    ]);
 
-//     $responseKeys = json_decode($response->getBody(), true);
+    $responseKeys = json_decode($response->getBody(), true);
 
-//     return isset($responseKeys['success']) && $responseKeys['success'] === true;
-// }
+    return isset($responseKeys['success']) && $responseKeys['success'] === true;
+}
 
 // Registrar el autoload
 spl_autoload_register(function ($clase) {

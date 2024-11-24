@@ -84,4 +84,22 @@ class Rol extends BaseDatos {
         }
         return $resp;
     }
+
+    public function cargar()
+    {
+        $resp = false;
+        $sql = "SELECT * FROM rol WHERE idrol = " . $this->getIdRol();
+        if ($this->Iniciar()) {
+            $res = $this->Ejecutar($sql);
+            if ($res > -1) {
+                if ($res > 0) {
+                    $row = $this->Registro();
+                    $this->setear($row['idrol'], $row['rodescripcion']);
+                }
+            }
+        } else {
+            $this->setMensajeOperacion("rol->cargar: " . $this->getError());
+        }
+        return $resp;
+    }
 }

@@ -14,13 +14,7 @@ include_once '../estructura/nav.php';
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-
-
-
-
-
-
-    <link rel="stylesheet" href="../estructura/style.css">
+    <link rel="stylesheet" href="../assests/css/style.css">
 <body>
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="card shadow-sm" style="width: 400px;">
@@ -61,7 +55,7 @@ include_once '../estructura/nav.php';
     <?php
 include_once '../estructura/footer.php';
 ?>
-    <script src="../utils/registro-ajax.js"></script>
+    <script src="../assests/js/registro-ajax.js"></script>
 
 
 </body>

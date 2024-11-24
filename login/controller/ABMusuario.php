@@ -5,7 +5,6 @@ class ABMUsuario
     public function abm($datos)
     {
         $resp = false;
-        //print_r($datos);
         if ($datos['accion'] == 'editar') {
             if ($this->modificacion($datos)) {
                 $resp = true;
@@ -44,17 +43,13 @@ class ABMUsuario
     {
         $obj = null;
         //SELECT `idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado` FROM `usuario` WHERE 1
-        print_r($param);
         echo "Cargue el objeto" . array_key_exists('id', $param) . " " . array_key_exists('nombreUsuario', $param) . " " . array_key_exists('password', $param) . " " . array_key_exists('email', $param);
 
         if (array_key_exists('id', $param) and array_key_exists('nombreUsuario', $param) and array_key_exists('password', $param)
             and array_key_exists('email', $param)) {
-            echo "Cargue el dsdsdsd";
             $obj = new Usuario();
             $obj->setear($param['id'], $param['nombreUsuario'], $param['password'], $param['email'], null);
-            echo "Cargue el objeto";
         }
-        print_r($obj);
         return $obj;
     }
 
@@ -157,7 +152,6 @@ class ABMUsuario
 
     public function modificacion($param)
     {
-        //echo "Estoy en modificacion";
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $elObjtTabla = $this->cargarObjeto($param);
@@ -168,7 +162,7 @@ class ABMUsuario
         return $resp;
     }
 
-    public function darRoles($param)
+    /*public function darRoles($param)
     {
         $where = " true ";
         if ($param != null) {
@@ -183,9 +177,9 @@ class ABMUsuario
         }
         $obj = new UsuarioRol();
         $arreglo = $obj->listar($where);
-        //echo "Van ".count($arreglo);
+        echo "Van ".count($arreglo);
         return $arreglo;
-    }
+    }*/
 
     /**
      * permite buscar un objeto
@@ -197,11 +191,9 @@ class ABMUsuario
         $where = "";
         if ($param != null) {
 
-
             if (isset($param['email'])) {
-                $where .= "  email ='" . $param['email'] . "'";
+                $where .= "email ='" . $param['email'] . "'";
             }
-          
         }
         $obj = new Usuario();
         $arreglo = $obj->listar($where);
@@ -210,36 +202,33 @@ class ABMUsuario
     }
 
 
-
     public function usuarioExiste($data)
     {
-        $respuesta = false; // Bandera inicializada como false
-        // Obtiene la lista de usuarios basada en los datos proporcionados
+        $respuesta = false;
         $list = $this->buscar($data);
-    
-        // Recorre la lista de usuarios
         foreach ($list as $usActual) {
-            // Verifica si el correo coincide con el proporcionado
-            if ($usActual->getusmail() === $data['email']) {
-                $respuesta = true; // Cambia la bandera a true si encuentra coincidencia
+            if (($usActual->getusmail() == $data['email'])) {
+                $respuesta = true;
             }
         }
-    
-        return $respuesta; // Retorna la bandera
+        return $respuesta;
     }
     
-
 
     
     public function insertUser($data)
     {
         $respuesta = false;
 
+
         $existe= $this->usuarioExiste($data);
         if ($existe == false){
+
              // Crear un objeto Usuario
         $objUsuario = new Usuario();
         $objUsuarioRol = new UsuarioRol();
+
+
 
         // Configurar el objeto Usuario con los datos proporcionados
         $objUsuario->setusnombre($data['nombreUsuario']);
@@ -268,5 +257,3 @@ class ABMUsuario
     }
 
 }
-
-

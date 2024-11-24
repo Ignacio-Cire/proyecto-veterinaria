@@ -1,51 +1,59 @@
+<?php
+include_once '../estructura/nav-seguro.php'; // Usuario logueado
+include_once '../../../configuracion.php'; // Configuración general
+include_once '../../controller/session.php'; // Controlador de sesión
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Cliente</title>
+    <title>Proyecto Veterinaria</title>
+    <!-- Enlace a Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../estructura/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../assests/css/style.css">
 </head>
-<body>
+<body><br><br>
 
-    <?php 
-    include_once '../estructura/nav.php';
-    include_once '../../../configuracion.php';
-    include_once '../../controller/session.php';    
 
-$objSession = new Session();
+<!-- Carrusel de imágenes -->
 
-?> <!-- Esto es para incluir la barra de navegación si tienes -->
-
-    <div class="container mt-5">
-        <h1>Bienvenido a tu Dashboard, <?php echo htmlspecialchars($objSession->getUsuario()); ?>!</h1>
-        <p>Este es tu espacio donde podrás gestionar tu cuenta y realizar compras.</p>
-
-        <!-- Ejemplo de contenido del dashboard -->
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        Información de tu cuenta
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Nombre:</strong> <?php echo htmlspecialchars($objSession->getUsuario()); ?></p>
-                        <p><strong>Email:</strong> <?php echo htmlspecialchars($objSession->getEmail()); ?></p>
-                        <!-- Aquí podrías agregar más datos del usuario, como dirección, teléfono, etc. -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Agrega más secciones o funcionalidades aquí -->
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="../assests/img/imagen1.jpg" class="d-block w-100" alt="Imagen 1">
         </div>
-
-        <!-- Botón para cerrar sesión -->
-        <form action="../Login/logout.php" method="POST">
-            <button type="submit" class="btn btn-danger mt-3">Cerrar Sesión</button>
-        </form>
+        <div class="carousel-item">
+            <img src="../assests/img/imagen2.jpg" class="d-block w-100" alt="Imagen 2">
+        </div>
+        <div class="carousel-item">
+            <img src="../assests/img/imagen3.jpg" class="d-block w-100" alt="Imagen 3">
+        </div>
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
+    </a>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<?php include_once '../estructura/footer.php'; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assests/js/agregarCarrito.js"></script>
+<script src="../assests/js/carrito.js"></script>
+
 </body>
 </html>

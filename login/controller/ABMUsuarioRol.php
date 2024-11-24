@@ -1,7 +1,4 @@
 <?php
-
-include_once '../../models/UsuarioRol.php'; 
-
 class ABMUsuarioRol
 {
 
@@ -32,22 +29,23 @@ class ABMUsuarioRol
         return null;
     }
 
-    // Método para listar todas las relaciones usuario-rol
-    public function listar()
-    {
-        $lista = [];
-        $sql = "SELECT * FROM usuariorol";
-        $base = new BaseDatos();
-        if ($base->Iniciar()) {
-            $resultado = $base->Ejecutar($sql);
-            if ($resultado) {
-                while ($fila = $resultado->fetch_assoc()) {
-                    $objUsuarioRol = new UsuarioRol();
-                    $objUsuarioRol->setear($fila['idUsuario'], $fila['idRol']);
-                    $lista[] = $objUsuarioRol;
-                }
-            }
+    public function buscar($param)
+{
+    $where = "";
+    
+    // Verificar si se proporcionan parámetros para la búsqueda
+    if ($param != null) {
+        if (isset($param['idusuario'])) {
+            $where .= "idusuario = '" . $param['idusuario'] . "'";
         }
-        return $lista;
     }
+
+    // Crear un objeto UsuarioRol y usar el método listar con el where generado
+    $objUsuarioRol = new UsuarioRol();
+    $arreglo = $objUsuarioRol->listar($where);
+
+    return $arreglo;
+}
+
+
 }

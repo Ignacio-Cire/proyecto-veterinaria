@@ -73,13 +73,13 @@ class UsuarioRol extends BaseDatos {
 
     // Método para obtener el rol de un usuario
     public function seleccionar() {
-        $sql = "SELECT * FROM usuariorol WHERE idUsuario = ".$this->getIdUsuario();
+        $sql = "SELECT * FROM usuariorol WHERE idusuario = ".$this->getIdUsuario();
         if ($this->Iniciar()) {
             $resultado = $this->Ejecutar($sql);
             if ($resultado) {
                 $fila = $resultado->fetch_assoc();
                 if ($fila) {
-                    $this->setear($fila['idUsuario'], $fila['idRol']);
+                    $this->setear($fila['idusuario'], $fila['idrol']);
                     return true;
                 }
             } else {
@@ -88,4 +88,41 @@ class UsuarioRol extends BaseDatos {
         }
         return false;
     }
+
+    public function listar($parametro = "")
+{
+    $arreglo = array();
+    $sql = "SELECT * FROM usuariorol "; // Tabla de relaciones usuario-rol
+
+    // Si se pasa un parámetro, añadir la cláusula WHERE
+    if ($parametro != "") {
+        $sql .= ' WHERE ' . $parametro;
+    }
+
+    // Iniciar la conexión a la base de datos
+    if ($this->Iniciar()) {
+        $res = $this->Ejecutar($sql); // Ejecutar la consulta
+        
+        // Verificar si la ejecución fue exitosa
+        if ($res > -1) {  // Si la ejecución fue exitosa
+            if ($res > 0) {
+                // Iterar a través de los resultados de la consulta
+                while ($row = $this->Registro()) {
+                    $obj = new UsuarioRol(); // Crear un nuevo objeto UsuarioRol
+                    $obj->setear($row['idusuario'], $row['idrol']); // Setear los valores de usuario y rol
+                    array_push($arreglo, $obj); // Añadir el objeto al arreglo
+                }
+            }
+        } else {
+            // Si la consulta falló, establecer un mensaje de error
+            $this->setMensajeOperacion("usuariorol->listar: " . $this->getError());
+        }
+    }
+    
+    return $arreglo; // Retornar el arreglo de objetos UsuarioRol
+}
+
+
+    
+
 }

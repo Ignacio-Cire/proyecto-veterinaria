@@ -1,4 +1,4 @@
-<!-- header.php -->
+<!-- nav.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +9,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assests/css/style.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
     <header>
         <!-- Logo y Nombre -->
         <div class="logo">
-            <a href="http://localhost:3000/login/views/home/index.php"><img src="../../assests/img/Logo.png" alt="Logo"></a> 
+            <a href="http://localhost:3000/login/views/home/index.php"><img src="../assests/img/Logo.png" alt="Logo"></a> <!-- Asegúrate de poner la ruta correcta a tu imagen -->
         </div>
 
         <!-- Barra de búsqueda -->
@@ -41,12 +41,13 @@
             <a href="http://localhost:3000/login/views/Login/login.php" class="login">Login</a>
 
 
-            <a class="cart" href="http://localhost:3000/login/views/carritoMuestra.php">
-    <span class="cart-icon">🛒</span> Carrito (<span id="contadorCarrito">0</span>)</a>
+            <a class="cart">
+    <span class="cart-icon"></a>
 
-            <a class="nav-link" href="https://github.com/Ignacio-Cire/login-security.git" target="_blank">
+            <a class="nav-link" href="https://github.com/Sofia-Nb/Proyecto-veterinaria" target="_blank">
                 <i class="fab fa-github fa-2x"></i>
             </a>
+
         </div>
     </header>
 
@@ -58,17 +59,9 @@
     <!-- Menú de navegación -->
     <div class="nav-links">
         <ul>
-            <li><a href="../tienda.php">Tienda</a></li>
-            <li><a href="http://localhost:3000/login/views/home/index-seguro.php">Ofertas</a></li>
-            <li class="dropdown">
-                <a href="#">Categorías</a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Perros</a></li>
-                    <li><a href="#">Gatos</a></li>
-                </ul>
-            </li>
+            <li><a href="../Login/login.php">Productos</a></li>
+            <li class="dropdown"></li>
             <li><a href="#">Contacto</a></li>
-            <!-- <li><a href="#">Turnos</a></li> -->
         </ul>
     </div>
 </div>

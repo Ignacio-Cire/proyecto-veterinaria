@@ -79,7 +79,7 @@ class Usuario extends BaseDatos
     public function cargar()
     {
         $resp = false;
-        $sql = "SELECT * FROM usuario WHERE id = " . $this->getidusuario();
+        $sql = "SELECT * FROM usuarios WHERE id = " . $this->getidusuario();
         if ($this->Iniciar()) {
             $res = $this->Ejecutar($sql);
             if ($res > -1) {
@@ -90,7 +90,7 @@ class Usuario extends BaseDatos
                 }
             }
         } else {
-            $this->setmensajeoperacion("usuario->listar: " . $this->getError());
+            $this->setmensajeoperacion("usuarios->listar: " . $this->getError());
         }
         return $resp;
 
@@ -102,7 +102,7 @@ class Usuario extends BaseDatos
     public function insertar()
     {
         $resp = false;
-        $sql = "INSERT INTO usuario(nombreUsuario,password,email,usDeshabilitado)
+        $sql = "INSERT INTO usuarios(nombreUsuario,password,email,usDeshabilitado)
             VALUES('" . $this->getusnombre() . "','" . $this->getuspass() . "','" . $this->getusmail() . "'," . ($this->getusdeshabilitado() === null ? 'NULL' : "'" . $this->getusdeshabilitado() . "'") . ");";
           
 
@@ -112,11 +112,11 @@ class Usuario extends BaseDatos
                 $this->setidusuario($elid);
                 $resp = true;
             } else {
-                $this->setmensajeoperacion("usuario->insertar: " . $this->getError());
+                $this->setmensajeoperacion("usuarios->insertar: " . $this->getError());
                 echo "Error al insertar: " . $this->getmensajeoperacion(); // Para depuración
             }
         } else {
-            $this->setmensajeoperacion("usuario->insertar: " . $this->getError());
+            $this->setmensajeoperacion("usuarios->insertar: " . $this->getError());
             echo "Error al iniciar conexión: " . $this->getmensajeoperacion(); // Para depuración
         }
         return $resp;
@@ -130,7 +130,7 @@ class Usuario extends BaseDatos
     public function modificar()
     {
         $resp = false;
-        $sql = "UPDATE usuario SET nombreUsuario='" . $this->getusnombre() . "' ,uspass='" . $this->getuspass() . "',usmail='" . $this->getusmail() . "' ,usdeshabilitado='" . $this->getusdeshabilitado() . "'  " .
+        $sql = "UPDATE usuarios SET nombreUsuario='" . $this->getusnombre() . "' ,uspass='" . $this->getuspass() . "',usmail='" . $this->getusmail() . "' ,usdeshabilitado='" . $this->getusdeshabilitado() . "'  " .
         " WHERE idusuario=" . $this->getidusuario();
         if ($this->Iniciar()) {
             echo $sql;
@@ -148,15 +148,15 @@ class Usuario extends BaseDatos
     public function eliminar()
     {
         $resp = false;
-        $sql = "DELETE FROM usuario WHERE idusuario=" . $this->getidusuario();
+        $sql = "DELETE FROM usuarios WHERE idusuario=" . $this->getidusuario();
         if ($this->Iniciar()) {
             if ($this->Ejecutar($sql)) {
                 return true;
             } else {
-                $this->setmensajeoperacion("Especie->eliminar: " . $this->getError());
+                $this->setmensajeoperacion("usuarios->eliminar: " . $this->getError());
             }
         } else {
-            $this->setmensajeoperacion("Especie->eliminar: " . $this->getError());
+            $this->setmensajeoperacion("usuarios->eliminar: " . $this->getError());
         }
         return $resp;
     }
@@ -164,7 +164,7 @@ class Usuario extends BaseDatos
     public function listar($parametro = "")
     {
         $arreglo = array();
-        $sql = "SELECT * FROM usuario ";
+        $sql = "SELECT * FROM usuarios ";
         if ($parametro != "") {
             $sql .= 'WHERE ' . $parametro;
         }
@@ -181,7 +181,7 @@ class Usuario extends BaseDatos
                     }
                 }
             } else {
-                $this->setmensajeoperacion("usuario->listar: " . $this->getError());
+                $this->setmensajeoperacion("usuarios->listar: " . $this->getError());
             }
         }
         return $arreglo;
