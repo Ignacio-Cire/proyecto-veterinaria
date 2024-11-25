@@ -1,6 +1,6 @@
 <?php
-require '../../../vendor/autoload.php'; // Composer para manejar dependencias
-require '../../../configuracion.php';  // Configuración incluida manualmente
+include_once '../../../vendor/autoload.php'; // Composer para manejar dependencias
+include_once '../../../configuracion.php';  // Configuración incluida manualmente
 
 use GuzzleHttp\Client;
 

@@ -99,14 +99,15 @@ $rolUsuario = $objSession->getRol(); // Esto te dará el rol del usuario
             </div>
         </header>
 
-        <!-- Barra de navegación personalizada -->
+        <!-- ADMINISTRADOR -->
         <div class="navbar">
             <div class="nav-links">
                 <ul>
 
                     <?php if ($rolUsuario == 1): ?>
-                        <li><a href="eliminar_usuarios.php" class="btn btn-danger">Eliminar Usuarios</a></li>
-                        <li><a href="asignar_roles.php" class="btn btn-success">Asignar Roles</a></li>
+                      
+                        <li><a href="" class="btn btn-success">Usuarios</a></li>
+                        
                         <li><a href="gestion_productos.php" class="btn btn-info">Gestionar Productos</a></li>
                         <li><a href="gestion_productos.php" class="btn btn-primary">Gestionar Compras</a></li>
 

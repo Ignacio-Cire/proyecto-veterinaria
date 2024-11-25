@@ -8,10 +8,6 @@ $('#miFormulario').submit(function (e) {
     const password = $('#password').val().trim();
     // const recaptchaResponse = grecaptcha.getResponse(); // Captura la respuesta del reCAPTCHA
 
-
-    //   // Genera un hash de la contraseña utilizando bcrypt
-    //   const hashedPassword = bcrypt.hashSync(password, 10); // 10 es el factor de costo (más alto = más seguro)
-
     // Validación básica: Verifica que los campos no estén vacíos
     if (nombreUsuario === "" || email === "" || password === "") {
         alert("Debe completar todos los campos.");

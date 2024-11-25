@@ -1,12 +1,11 @@
 <?php
-include_once '../../controller/session.php';
-include_once '../utils/funciones.php';
+include_once '../../../controller/session.php';
+include_once '../../utils/funciones.php';
 
 
 
-// Deshabilitar la salida de errores PHP como HTML
-ini_set('display_errors', 0);
-error_reporting(E_ALL);
+
+
 
 // Configurar headers para JSON
 header('Content-Type: application/json');
