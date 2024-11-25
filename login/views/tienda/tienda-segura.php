@@ -6,7 +6,7 @@ include_once '../../controller/session.php'; // Controlador de sesión
 $objSession = new session;
 $usuarioId = $objSession->getidusuario();
 
-// Luego pasas este ID a JavaScript
+
 echo "<script> var usuarioId = " . json_encode($usuarioId) . "; </script>";
 ?>
 <!DOCTYPE html>
@@ -35,14 +35,14 @@ echo "<script> var usuarioId = " . json_encode($usuarioId) . "; </script>";
                     <h5 class="card-title">Collar de verde</h5>
                     <p class="card-text">Un collar elegante verde para cualquier ocasión especial. Longitud ajustable.</p>
                     <p class="card-text"><strong>Precio: US$ 29.99</strong></p>
-                    <a href="javascript:void(0)" class="btn btn-warning agregarCarrito" data-producto="collar1" data-nombre="Collar de Plata" data-precio="29.99">Agregar al carrito</a>
+                    <a href="javascript:void(0)" class="btn btn-warning agregarCarrito" data-producto="collar1" data-nombre="Collar verde" data-precio="29.99">Agregar al carrito</a>
                 </div>
             </div>
         </div>
         </form>
 
         <!-- Producto 2 -->
-        <form id='collar2' method ='POST'>
+        <form  method ='POST'>
         <div class="col-md-4 mb-4">
             <div class="card">
                 <img src="../assests/img/img6.jpg" class="card-img-top" alt="Collar 2">
@@ -50,7 +50,7 @@ echo "<script> var usuarioId = " . json_encode($usuarioId) . "; </script>";
                     <h5 class="card-title">Collar de colores</h5>
                     <p class="card-text">Collar de colores ideal para eventos formales y elegantes.</p>
                     <p class="card-text"><strong>Precio: US$ 129.99</strong></p>
-                    <a href="javascript:void(0)"  class="btn btn-warning agregarCarrito" data-producto="collar2" data-nombre="Collar de Oro" data-precio="129.99">Agregar al carrito</a>
+                    <a href="javascript:void(0)"  class="btn btn-warning agregarCarrito" data-producto="collar2" data-nombre="Collar de colores" data-precio="129.99">Agregar al carrito</a>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@ echo "<script> var usuarioId = " . json_encode($usuarioId) . "; </script>";
                     <h5 class="card-title">Collar de tela</h5>
                     <p class="card-text">Collar de tela con detalles metálicos. Perfecto para looks casuales.</p>
                     <p class="card-text"><strong>Precio: US$ 19.99</strong></p>
-                    <a href="javascript:void(0)" class="btn btn-warning agregarCarrito" data-producto="collar3" data-nombre="Collar de Cuero" data-precio="19.99">Agregar al carrito</a>
+                    <a href="javascript:void(0)" class="btn btn-warning agregarCarrito" data-producto="collar3" data-nombre="Collar de tela" data-precio="19.99">Agregar al carrito</a>
                 </div>
             </div>
         </div>

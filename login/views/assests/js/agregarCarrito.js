@@ -1,8 +1,13 @@
+
+
+
 $(document).ready(function() {
     // Función para agregar un producto al carrito
     $('.agregarCarrito').on('click', function(e) {
         e.preventDefault();
-    
+
+      
+
         
         var productoId = $(this).data('producto');
         var productoNombre = $(this).data('nombre');
@@ -20,14 +25,16 @@ $(document).ready(function() {
             precio: productoPrecio
         };
 
-      
+
+        
+        alert("datos enviados al ajax: " + JSON.stringify(data));
     
 
         // Realizamos la solicitud AJAX para agregar el producto al carrito
         $.ajax({
         
-            url: '../../../controller/ABMCarrito.php', // Este es el archivo PHP donde se maneja la lógica
-           
+            url: '../../carrito/action/agregarCarrito.php', // Este es el archivo PHP donde se maneja la lógica
+      
             type: 'POST',
             contentType: 'application/json',  // Especificamos que enviamos datos JSON
             dataType: 'json',  // Esperamos una respuesta JSON del backend
@@ -65,7 +72,7 @@ $(document).ready(function() {
 
         // Realizamos la solicitud AJAX para eliminar el producto del carrito
         $.ajax({
-            url: '../../../controller/ABMCarrito.php', // El mismo archivo PHP, con lógica diferente según la acción
+            url: '../../carrito/action/agregarCarrito.php', // El mismo archivo PHP, con lógica diferente según la acción
             type: 'POST',
             contentType: 'application/json',  // Especificamos que enviamos datos JSON
             dataType: 'json',  // Esperamos una respuesta JSON del backend
